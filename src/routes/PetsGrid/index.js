@@ -1,5 +1,5 @@
 import { h, Component } from 'preact';
-import { contentfulClient } from '../../helpers/contentful/contentfulClient'
+import contentfulClient from '../../helpers/contentful/contentfulClient'
 
 import style from './style';
 
