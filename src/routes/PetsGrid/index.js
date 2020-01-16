@@ -8,7 +8,7 @@ export default class PetsGrid extends Component {
     super();
     this.state = {
       petItems: [],
-      arePetsLoaded: false
+      arePetsLoaded: 
     };
   }
 
