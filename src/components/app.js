@@ -1,9 +1,9 @@
-import { h, Component } from "preact";
-import { Router } from "preact-router";
-import "bulma/css/bulma.min.css";
+import { h, Component } from 'preact';
+import { Router } from 'preact-router';
+import 'bulma/css/bulma.min.css';
 
 // Code-splitting is automated for routes
-import PetsGrid from "../routes/PetsGrid";
+import PetsGrid from '../routes/PetsGrid';
 
 export default class App extends Component {
   /** Gets fired when the route changes.

@@ -9,7 +9,8 @@
     "dev": "preact watch",
     "lint": "node_modules/.bin/eslint --debug src/",
     "lint:write": "node_modules/.bin/eslint --debug src/ --fix",
-    "prettier": "prettier --write src/**/*.js"
+    "prettier": "prettier --write src/**/*.js",
+    "precommit": "lint-staged"
   },
   "browserslist": [
     "> 1%",
@@ -17,13 +18,13 @@
   ],
   "husky": {
     "hooks": {
-      "pre-commit": "/lint-staged"
+      "pre-commit": "npm run precommit"
     }
   },
   "lint-staged": {
     "*.{js, jsx}": [
       "prettier --write src/**/*.js",
-      "node_modules/.bin/eslint --max-warnings=0",
+      "node_modules/.bin/eslint --debug src/ --fix",
       "git add"
     ]
   },
