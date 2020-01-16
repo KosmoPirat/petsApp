@@ -9,12 +9,10 @@ module.exports = {
         'babel',
         'import',
         'jsx-a11y',
-        'react',
         'prettier',
     ],
     rules: {
         'linebreak-style': 'off',
-
         'arrow-parens': 'off',
         'object-curly-newline': 'off',
         'no-mixed-operators': 'off',
@@ -40,6 +38,7 @@ module.exports = {
         'react/no-did-mount-set-state': 'off',
         'react/no-unused-prop-types': 'off',
         'react/jsx-one-expression-per-line': 'off',
+        'react/no-unused-state': 'off',
 
         "jsx-a11y/anchor-is-valid": ["error", { "components": ["Link"], "specialLink": ["to"] }],
         "jsx-a11y/label-has-for": [2, {
@@ -49,5 +48,6 @@ module.exports = {
         }],
 
         'prettier/prettier': ['error'],
+        "jsx-quotes": [1, "prefer-double"]
     },
 };
