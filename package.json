@@ -7,9 +7,6 @@
     "build": "preact build",
     "serve": "preact build && preact serve",
     "dev": "preact watch",
-    "lint": "node_modules/.bin/eslint --debug src/",
-    "lint:write": "node_modules/.bin/eslint src/**/*.{js,jsx} --fix",
-    "prettier": "prettier --write src/**/*.{js,jsx}",
     "precommit": "lint-staged"
   },
   "browserslist": [
@@ -24,7 +21,7 @@
   "lint-staged": {
     "src/**/*.{js,jsx}": [
       "prettier --write",
-      "npm run lint:write",
+      "node_modules/.bin/eslint src/**/*.{js,jsx} --fix",
       "git add"
     ]
   },
