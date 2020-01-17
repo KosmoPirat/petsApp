@@ -4,4 +4,3 @@ node_modules
 /build
 /*.log
 .idea
-src/helpers/contentful/*.js

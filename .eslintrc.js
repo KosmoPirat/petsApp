@@ -4,50 +4,55 @@ module.exports = {
         browser: true,
         node: true,
     },
-    extends: ['airbnb', 'standard-preact', 'prettier'],
-    plugins: [
-        'babel',
-        'import',
-        'jsx-a11y',
-        'prettier',
-    ],
+    extends: ['airbnb', 'standard', 'standard-preact', 'prettier'],
+    plugins: ['babel', 'import', 'jsx-a11y', 'prettier'],
+    parser: 'babel-eslint',
+    parserOptions: {
+        ecmaVersion: 6,
+        sourceType: 'module',
+        ecmaFeatures: {
+            jsx: true
+        }
+    },
     rules: {
-        'linebreak-style': 'off',
-        'arrow-parens': 'off',
-        'object-curly-newline': 'off',
-        'no-mixed-operators': 'off',
-        'arrow-body-style': 'off',
-        'function-paren-newline': 'off',
+        'linebreak-style': 'off', // Неправильно работает в Windows.
+
+        'arrow-parens': 'off', // Несовместимо с prettier
+        'object-curly-newline': 'off', // Несовместимо с prettier
+        'no-mixed-operators': 'off', // Несовместимо с prettier
+        'arrow-body-style': 'off', // Это - не наш стиль?
+        'function-paren-newline': 'off', // Несовместимо с prettier
         'no-plusplus': 'off',
-        'space-before-function-paren': 0,
+        'space-before-function-paren': 0, // Несовместимо с prettier
 
-        'max-len': ['error', 100, 2, { ignoreUrls: true, }],
-        'no-console': 'error',
-        'no-alert': 'error',
+        'max-len': ['error', 100, 2, { ignoreUrls: true, }], // airbnb позволяет некоторые пограничные случаи
+        'no-console': 'error', // airbnb использует предупреждение
+        'no-alert': 'error', // airbnb использует предупреждение
+        'no-mixed-spaces-and-tabs': 'error',
 
-        'no-param-reassign': 'off',
-        "radix": "off",
+        'no-param-reassign': 'off', // Это - не наш стиль?
+        "radix": "off", // parseInt, parseFloat и radix выключены. Мне это не нравится.
 
-        'react/require-default-props': 'off',
-        'react/forbid-prop-types': 'off',
-        'react/jsx-filename-extension': ['error', { extensions: ['.js'] }],
+        'react/require-default-props': 'off', // airbnb использует уведомление об ошибке
+        'react/forbid-prop-types': 'off', // airbnb использует уведомление об ошибке
+        'react/jsx-filename-extension': ['error', { extensions: ['.js'] }], // airbnb использует .jsx
+        "react/jsx-indent" : ["error", "tab"],
+        "react/no-unused-state": "off",
+        "react/no-unknown-property": ["error", {ignore: ['class']}],
 
         'prefer-destructuring': 'off',
 
-        'react/no-find-dom-node': 'off',
-        'react/no-did-mount-set-state': 'off',
-        'react/no-unused-prop-types': 'off',
-        'react/jsx-one-expression-per-line': 'off',
-        'react/no-unused-state': 'off',
+        "class-methods-use-this": "off",
+
+        'react/no-find-dom-node': 'off', // Я этого не знаю
 
         "jsx-a11y/anchor-is-valid": ["error", { "components": ["Link"], "specialLink": ["to"] }],
         "jsx-a11y/label-has-for": [2, {
             "required": {
                 "every": ["id"]
             }
-        }],
+        }], // для ошибки вложенных свойств htmlFor элементов label
 
         'prettier/prettier': ['error'],
-        "jsx-quotes": [1, "prefer-double"]
     },
 };

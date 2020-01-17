@@ -8,8 +8,8 @@
     "serve": "preact build && preact serve",
     "dev": "preact watch",
     "lint": "node_modules/.bin/eslint --debug src/",
-    "lint:write": "node_modules/.bin/eslint --debug src/ --fix",
-    "prettier": "prettier --write src/**/*.js",
+    "lint:write": "node_modules/.bin/eslint src/**/*.{js,jsx} --fix",
+    "prettier": "prettier --write src/**/*.{js,jsx}",
     "precommit": "lint-staged"
   },
   "browserslist": [
@@ -22,32 +22,31 @@
     }
   },
   "lint-staged": {
-    "*.{js, jsx}": [
-      "prettier --write src/**/*.js",
-      "node_modules/.bin/eslint --debug src/ --fix",
+    "src/**/*.{js,jsx}": [
+      "prettier --write",
+      "npm run lint:write",
       "git add"
     ]
   },
   "devDependencies": {
-    "@babel/core": "^7.8.3",
-    "@babel/preset-env": "^7.8.3",
-    "babel-loader": "^8.0.6",
-    "babel-preset-preact": "^2.0.0",
-    "css-loader": "^3.4.2",
-    "eslint": "^6.1.0",
+    "babel-eslint": "^8.2.3",
+    "eslint": "^6.8.0",
     "eslint-config-airbnb": "^18.0.1",
     "eslint-config-prettier": "^6.9.0",
+    "eslint-config-standard": "^14.1.0",
     "eslint-config-standard-preact": "^1.1.6",
     "eslint-plugin-babel": "^5.3.0",
     "eslint-plugin-import": "^2.20.0",
     "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-node": "^11.0.0",
     "eslint-plugin-prettier": "^3.1.2",
-    "husky": "^4.0.9",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-react": "^7.18.0",
+    "eslint-plugin-standard": "^4.0.1",
+    "husky": "^4.0.10",
     "lint-staged": "^9.5.0",
-    "mini-css-extract-plugin": "^0.9.0",
     "preact-cli": "^3.0.0-rc.6",
-    "prettier": "^1.19.1",
-    "style-loader": "^1.1.2"
+    "prettier": "^1.19.1"
   },
   "dependencies": {
     "bulma": "0.8.0",
