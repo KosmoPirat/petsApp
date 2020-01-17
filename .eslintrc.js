@@ -46,7 +46,7 @@ module.exports = {
 
         'react/require-default-props': 'off',
         'react/forbid-prop-types': 'off',
-        'react/jsx-filename-extension': ['error', { extensions: ['.js', '.jsx'] }],
+        'react/jsx-filename-extension': ['error', { extensions: ['.jsx'] }],
         "react/jsx-indent" : ["error", 4],
         "react/no-unused-state": "off",
         "react/no-unknown-property": ["error", {ignore: ['class']}],
