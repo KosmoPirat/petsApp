@@ -27,6 +27,7 @@ module.exports = {
         'function-paren-newline': 'off',
         'no-plusplus': 'off',
         'space-before-function-paren': 0,
+        'no-debugger': 'error',
 
         'max-len': ["error", {
             "code": 100,
