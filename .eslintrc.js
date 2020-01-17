@@ -2,7 +2,6 @@ module.exports = {
     env: {
         es6: true,
         browser: true,
-        node: true,
     },
     extends: ['airbnb', 'standard', 'standard-preact', 'prettier'],
     plugins: ['babel', 'import', 'jsx-a11y', 'prettier'],
@@ -15,36 +14,46 @@ module.exports = {
         }
     },
     rules: {
-        'linebreak-style': 'off', // Неправильно работает в Windows.
+        'linebreak-style': 'off',
+        'indent': ["error", 4, {
+            "VariableDeclarator": "first",
+            "SwitchCase": 2
+        }],
 
-        'arrow-parens': 'off', // Несовместимо с prettier
-        'object-curly-newline': 'off', // Несовместимо с prettier
-        'no-mixed-operators': 'off', // Несовместимо с prettier
-        'arrow-body-style': 'off', // Это - не наш стиль?
-        'function-paren-newline': 'off', // Несовместимо с prettier
+        'arrow-parens': 'off',
+        'object-curly-newline': 'off',
+        'no-mixed-operators': 'off',
+        'arrow-body-style': 'off',
+        'function-paren-newline': 'off',
         'no-plusplus': 'off',
-        'space-before-function-paren': 0, // Несовместимо с prettier
+        'space-before-function-paren': 0,
 
-        'max-len': ['error', 100, 2, { ignoreUrls: true, }], // airbnb позволяет некоторые пограничные случаи
-        'no-console': 'error', // airbnb использует предупреждение
-        'no-alert': 'error', // airbnb использует предупреждение
+        'max-len': ["error", {
+            "code": 100,
+            "tabWidth": 4,
+            "ignoreUrls": true,
+            "ignoreComments": true,
+            "ignoreTrailingComments": true,
+            "ignoreRegExpLiterals": true
+        }],
+        'no-console': 'error',
+        'no-alert': 'error',
         'no-mixed-spaces-and-tabs': 'error',
 
-        'no-param-reassign': 'off', // Это - не наш стиль?
-        "radix": "off", // parseInt, parseFloat и radix выключены. Мне это не нравится.
+        'no-param-reassign': 'off',
+        "radix": "off",
 
-        'react/require-default-props': 'off', // airbnb использует уведомление об ошибке
-        'react/forbid-prop-types': 'off', // airbnb использует уведомление об ошибке
-        'react/jsx-filename-extension': ['error', { extensions: ['.js'] }], // airbnb использует .jsx
-        "react/jsx-indent" : ["error", "tab"],
+        'react/require-default-props': 'off',
+        'react/forbid-prop-types': 'off',
+        'react/jsx-filename-extension': ['error', { extensions: ['.js', '.jsx'] }],
+        "react/jsx-indent" : ["error", 4],
         "react/no-unused-state": "off",
         "react/no-unknown-property": ["error", {ignore: ['class']}],
+        "react/jsx-indent-props": ['error', 'first'],
 
         'prefer-destructuring': 'off',
 
         "class-methods-use-this": "off",
-
-        'react/no-find-dom-node': 'off', // Я этого не знаю
 
         "jsx-a11y/anchor-is-valid": ["error", { "components": ["Link"], "specialLink": ["to"] }],
         "jsx-a11y/label-has-for": [2, {
