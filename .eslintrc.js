@@ -16,9 +16,6 @@ module.exports = {
     settings: {
         react: {
             pragma: "h"
-        },
-        linkComponents: [
-            { name: "Link", linkAttribute: "href" }
-        ]
+        }
     }
 };
