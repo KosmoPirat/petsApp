@@ -21,13 +21,15 @@ export default class PetsGrid extends Component {
         });
     }
 
-    render(props, { arePetsLoaded, petItems }) {
+    render() {
+        const { arePetsLoaded, petItems } = this.state;
+
         if (!arePetsLoaded) {
             return <div>Идет загрузка данных</div>;
         }
 
         return (
-            <div class={style['pets-grid']}>
+            <div className={style['pets-grid']}>
                 {petItems.map(pet => (
                     <div className="card" key={pet.fields.name}>
                         <div className="card-image">
