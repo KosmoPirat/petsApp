@@ -7,10 +7,7 @@
     "build": "preact build",
     "serve": "preact build && preact serve",
     "dev": "preact watch",
-    "precommit": "lint-staged",
-    "lint": "node_modules/.bin/eslint --fix src/**/*.{js,jsx}",
-    "prettier": "prettier --write src/**/*.{js,jsx,css}",
-    "stylelint": "node_modules/.bin/stylelint src/**/*.css --fix"
+    "precommit": "lint-staged"
   },
   "browserslist": [
     "> 1%",
