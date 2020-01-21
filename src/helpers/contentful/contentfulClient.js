@@ -1,17 +1,17 @@
 import * as contentful from 'contentful';
 
 class ContentfulClient {
-    static client;
-
     constructor() {
-        ContentfulClient.client = contentful.createClient({
-            space: '6078e7py7ypq',
-            accessToken: 'uotkhjCYgWAIuR621OO8MXfNKjo7F7E7Tq2KEvvY2vY',
-        });
+        if (!this.client) {
+            this.client = contentful.createClient({
+                space: 'dwccqqzx8ful',
+                accessToken: '5xj8e6x3YDyJJMJnMTEu7yWdLSI7JX35QqUX8iOSX74',
+            });
+        }
     }
 
     async getAllPets() {
-        const allPets = await ContentfulClient.client.getEntries();
+        const allPets = await this.client.getEntries();
         return allPets;
     }
 }
