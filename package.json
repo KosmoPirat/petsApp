@@ -7,7 +7,10 @@
     "build": "preact build",
     "serve": "preact build && preact serve",
     "dev": "preact watch",
-    "precommit": "lint-staged"
+    "precommit": "lint-staged",
+    "lint": "node_modules/.bin/eslint --fix src/**/*.{js,jsx}",
+    "prettier": "prettier --write src/**/*.{js,jsx,css}",
+    "stylelint": "node_modules/.bin/stylelint src/**/*.css --fix"
   },
   "browserslist": [
     "> 1%",
@@ -23,6 +26,11 @@
       "prettier --write",
       "node_modules/.bin/eslint --fix",
       "git add"
+    ],
+    "src/**/*.css": [
+      "prettier --write",
+      "node_modules/.bin/stylelint --fix",
+      "git add"
     ]
   },
   "devDependencies": {
@@ -37,7 +45,11 @@
     "husky": "4.0.10",
     "lint-staged": "9.5.0",
     "preact-cli": "3.0.0-rc.6",
-    "prettier": "1.19.1"
+    "prettier": "1.19.1",
+    "stylelint": "13.0.0",
+    "stylelint-config-prettier": "8.0.1",
+    "stylelint-config-standard": "19.0.0",
+    "stylelint-order": "4.0.0"
   },
   "dependencies": {
     "bulma": "0.8.0",
