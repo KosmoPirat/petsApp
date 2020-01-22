@@ -1,26 +1,27 @@
-import { h, Component } from 'preact';
+import { h } from 'preact';
+import { useState, useCallback } from 'preact/hooks';
 import { Router } from 'preact-router';
 import 'bulma/css/bulma.min.css';
 
 // Code-splitting is automated for routes
 import PetsGrid from '../routes/PetsGrid/index';
 
-export default class App extends Component {
-    /** Gets fired when the route changes.
-     *	@param {Object} event		"change" event from [preact-router](http://git.io/preact-router)
-     *	@param {string} event.url	The newly routed URL
-     */
-    handleRoute = e => {
-        this.currentUrl = e.url;
-    };
+const App = () => {
+    const [currentUrl, changeCurrentUrl] = useState('');
 
-    render() {
-        return (
-            <div id="app">
-                <Router onChange={this.handleRoute}>
-                    <PetsGrid path="/" />
-                </Router>
-            </div>
-        );
-    }
-}
+    const handleRoute = useCallback(e => {
+        changeCurrentUrl(e.url);
+    }, []);
+
+    return (
+        <div id="app">
+            {/* временно оставим, чтобы был пример как доставать текущий урл в preact-router */}
+            <div>Текущая страница: {currentUrl}</div>
+            <Router onChange={handleRoute}>
+                <PetsGrid path="/" />
+            </Router>
+        </div>
+    );
+};
+
+export default App;
