@@ -3,8 +3,11 @@ import { useState, useCallback } from 'preact/hooks';
 import { Router } from 'preact-router';
 import 'bulma/css/bulma.min.css';
 
+import Header from './Header/Header';
+import Footer from './Footer/Footer';
+
 // Code-splitting is automated for routes
-import PetsGrid from '../routes/PetsGrid/index';
+import routes from '../routes';
 
 const App = () => {
     const [currentUrl, changeCurrentUrl] = useState('');
@@ -15,11 +18,16 @@ const App = () => {
 
     return (
         <div id="app">
-            {/* временно оставим, чтобы был пример как доставать текущий урл в preact-router */}
-            <div>Текущая страница: {currentUrl}</div>
-            <Router onChange={handleRoute}>
-                <PetsGrid path="/" />
-            </Router>
+            <Header />
+            <main className="main">
+                <div>Текущая страница: {currentUrl}</div>
+                <Router onChange={handleRoute} default="/">
+                    {routes.map(route => (
+                        <route.component key={route.path} path={route.path} />
+                    ))}
+                </Router>
+            </main>
+            <Footer />
         </div>
     );
 };
