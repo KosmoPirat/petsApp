@@ -43,6 +43,6 @@
     background: rgba(0, 0, 0, 0.2);
 }
 
-.header nav a.active {
+.header nav a.header__link_active {
     background: rgba(0, 0, 0, 0.4);
 }

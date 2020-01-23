@@ -1,5 +1,4 @@
 import { h } from 'preact';
-import { useState, useCallback } from 'preact/hooks';
 import { Router } from 'preact-router';
 import 'bulma/css/bulma.min.css';
 import style from './App.css';
@@ -11,18 +10,11 @@ import Footer from '../Footer/Footer';
 import routes from '../../routes';
 
 const App = () => {
-    const [currentUrl, changeCurrentUrl] = useState('');
-
-    const handleRoute = useCallback(e => {
-        changeCurrentUrl(e.url);
-    }, []);
-
     return (
         <div className={style.app}>
             <Header />
             <main className={style.app__main}>
-                <div>Текущая страница: {currentUrl}</div>
-                <Router onChange={handleRoute} default="/">
+                <Router>
                     {routes.map(route => (
                         <route.component key={route.path} path={route.path} />
                     ))}

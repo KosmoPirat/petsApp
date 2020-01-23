@@ -6,10 +6,10 @@ const Header = () => (
     <header className={style.header}>
         <h1>PetsApp</h1>
         <nav>
-            <Link activeClassName={style.active} href="/">
+            <Link activeClassName={style.header__link_active} href="/">
                 Main
             </Link>
-            <Link activeClassName={style.active} href="/pets">
+            <Link activeClassName={style.header__link_active} href="/pets">
                 Pets
             </Link>
         </nav>
