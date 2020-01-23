@@ -7,7 +7,7 @@ import style from './PetsLayout.css';
 
 const PetsLayout = () => {
     return (
-        <div className={style.pets__content}>
+        <div className={style['pets-layout']}>
             <PetsFilter />
             <PetsGrid />
         </div>

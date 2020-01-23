@@ -2,12 +2,13 @@ import { h } from 'preact';
 import { useState, useCallback } from 'preact/hooks';
 import { Router } from 'preact-router';
 import 'bulma/css/bulma.min.css';
+import style from './App.css';
 
-import Header from './Header/Header';
-import Footer from './Footer/Footer';
+import Header from '../Header/Header';
+import Footer from '../Footer/Footer';
 
 // Code-splitting is automated for routes
-import routes from '../routes';
+import routes from '../../routes';
 
 const App = () => {
     const [currentUrl, changeCurrentUrl] = useState('');
@@ -17,9 +18,9 @@ const App = () => {
     }, []);
 
     return (
-        <div id="app">
+        <div className={style.app}>
             <Header />
-            <main className="main">
+            <main className={style.app__main}>
                 <div>Текущая страница: {currentUrl}</div>
                 <Router onChange={handleRoute} default="/">
                     {routes.map(route => (
