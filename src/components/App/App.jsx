@@ -5,6 +5,7 @@ import style from './App.css';
 
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
+import PageNotFound from '../PageNotFound/PageNotFound';
 
 // Code-splitting is automated for routes
 import routes from '../../routes';
@@ -18,6 +19,7 @@ const App = () => {
                     {routes.map(route => (
                         <route.component key={route.path} path={route.path} />
                     ))}
+                    <PageNotFound default />
                 </Router>
             </main>
             <Footer />
