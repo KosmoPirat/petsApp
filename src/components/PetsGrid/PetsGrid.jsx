@@ -2,7 +2,7 @@ import { h } from 'preact';
 import { useState, useEffect } from 'preact/hooks';
 import contentfulClient from '../../helpers/contentful/contentfulClient';
 
-import style from './style.css';
+import style from './PetsGrid.css';
 
 const PetsGrid = () => {
     const [petItems, changePetItems] = useState([]);
@@ -20,7 +20,7 @@ const PetsGrid = () => {
     }
 
     return (
-        <div className={style['pets-grid']}>
+        <section className={style['pets-grid']}>
             {petItems.map(pet => (
                 <div className="card" key={pet.fields.name}>
                     <div className="card-image">
@@ -45,7 +45,7 @@ const PetsGrid = () => {
                     </div>
                 </div>
             ))}
-        </div>
+        </section>
     );
 };
 

@@ -1,7 +1,0 @@
-.pets-grid {
-    display: grid;
-    margin: 20px auto;
-    width: 1095px;
-    grid-template-columns: repeat(3, 350px);
-    gap: 15px;
-}
