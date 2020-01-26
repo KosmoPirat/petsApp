@@ -1,10 +1,8 @@
 import { h } from 'preact';
 import { Router } from 'preact-router';
 import 'bulma/css/bulma.min.css';
-import style from './App.css';
 
 import Header from '../Header/Header';
-import Footer from '../Footer/Footer';
 import PageNotFound from '../PageNotFound/PageNotFound';
 
 // Code-splitting is automated for routes
@@ -12,9 +10,9 @@ import routes from '../../routes';
 
 const App = () => {
     return (
-        <div className={style.app}>
+        <div>
             <Header />
-            <main className={style.app__main}>
+            <main className="container">
                 <Router>
                     {routes.map(route => (
                         <route.component key={route.path} path={route.path} />
@@ -22,7 +20,6 @@ const App = () => {
                     <PageNotFound default />
                 </Router>
             </main>
-            <Footer />
         </div>
     );
 };

@@ -14,6 +14,14 @@ class ContentfulClient {
         const allPets = await this.client.getEntries();
         return allPets;
     }
+
+    async getPetBySlug(slug) {
+        const specificPet = await this.client.getEntries({
+            content_type: 'pet',
+            'fields.slug': slug,
+        });
+        return specificPet.items[0];
+    }
 }
 
 export default new ContentfulClient();
