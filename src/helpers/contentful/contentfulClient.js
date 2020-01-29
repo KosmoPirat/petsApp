@@ -22,6 +22,14 @@ class ContentfulClient {
         });
         return specificPet.items[0];
     }
+
+    async getFilteredPetsList(searchParam) {
+        const newPetsList = await this.client.getEntries({
+            content_type: 'pet',
+            ...searchParam,
+        });
+        return newPetsList;
+    }
 }
 
 export default new ContentfulClient();
