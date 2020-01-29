@@ -20,7 +20,7 @@ const PetNameSearchInput = () => {
             <input
                 className="input"
                 type="text"
-                placeholder="Введите имя петомца"
+                placeholder="Введите имя питомца"
                 ref={input}
                 onInput={onChange}
             />
