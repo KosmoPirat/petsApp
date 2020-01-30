@@ -1,0 +1,6 @@
+.profile-photo-gallery__grid {
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    gap: 15px;
+    margin-bottom: 30px;
+}

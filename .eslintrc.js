@@ -4,7 +4,7 @@ module.exports = {
         browser: true,
     },
     extends: ['airbnb', 'plugin:prettier/recommended', 'prettier/react'],
-    plugins: ['import', 'react'],
+    plugins: ['import', 'react', 'jsx-a11y'],
     parser: 'babel-eslint',
     parserOptions: {
         ecmaVersion: 6,
@@ -17,5 +17,8 @@ module.exports = {
         react: {
             pragma: "h"
         }
+    },
+    rules: {
+        'jsx-a11y/tabindex-no-positive': 'off'
     }
 };

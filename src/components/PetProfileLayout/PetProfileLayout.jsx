@@ -3,6 +3,8 @@ import { useState, useEffect } from 'preact/hooks';
 import PropTypes from 'prop-types';
 import { route } from 'preact-router';
 import contentfulClient from '../../helpers/contentful/contentfulClient';
+import ProfileCard from '../ProfileCard/ProfileCard';
+import ProfilePhotoGallery from '../ProfilePhotoGallery/ProfilePhotoGallery';
 
 const PetProfileLayout = ({ slug }) => {
     const [pet, changePet] = useState(false);
@@ -23,25 +25,12 @@ const PetProfileLayout = ({ slug }) => {
         return null;
     }
 
+    const { name, sex, size, description } = pet.fields;
+
     return (
         <>
-            <div className="content is-medium">
-                <h1>{pet.fields.name}</h1>
-                <p>
-                    <strong>Пол: </strong>
-                    {pet.fields.sex}
-                    <br />
-                    <strong>Размер: </strong>
-                    {pet.fields.size}
-                </p>
-                <p>{pet.fields.description}</p>
-            </div>
-            <figure className="image column is-half is-offset-one-quarter">
-                <img
-                    src={pet.fields.mainPhoto.fields.file.url}
-                    alt={`Фотограция питомца ${pet.fields.name}`}
-                />
-            </figure>
+            <ProfileCard name={name} sex={sex} size={size} description={description} />
+            <ProfilePhotoGallery mainPhotoUrl={pet.fields.mainPhoto.fields.file.url} />
         </>
     );
 };
