@@ -5,7 +5,13 @@ import style from './PetsGrid.css';
 
 const PetsGrid = pets => {
     if (!pets.petsList.length) {
-        return <div>error loading pet data</div>;
+        return (
+            <div>
+                По запросу{' '}
+                <span className={style['search-request_error']}>{pets.searchRequest}</span> ничего
+                не найдено!
+            </div>
+        );
     }
 
     const listOfPets = pets.petsList.map(pet => (

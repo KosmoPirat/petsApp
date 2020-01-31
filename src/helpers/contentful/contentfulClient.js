@@ -16,11 +16,8 @@ class ContentfulClient {
     }
 
     async getPetBySlug(slug) {
-        const specificPet = await this.client.getEntries({
-            content_type: 'pet',
-            'fields.slug': slug,
-        });
-        return specificPet.items[0];
+        const petList = await this.getFilteredPetsList({ 'fields.slug': slug });
+        return petList.items[0];
     }
 
     async getFilteredPetsList(searchParam) {

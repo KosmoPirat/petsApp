@@ -4,3 +4,8 @@
     grid-template-columns: repeat(3, auto);
     gap: 15px;
 }
+
+.search-request_error {
+    font-weight: bold;
+    font-style: italic;
+}

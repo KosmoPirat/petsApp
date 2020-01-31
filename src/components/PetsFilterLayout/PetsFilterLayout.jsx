@@ -6,7 +6,7 @@ import style from './PetsFilterLayout.css';
 
 const PetsFilterLayout = () => {
     return (
-        <section className={style['pets-filter']}>
+        <section className={style['pets-filter-layout']}>
             <PetNameSearchInput />
         </section>
     );
