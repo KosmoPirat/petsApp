@@ -33,11 +33,18 @@ const PetProfileLayout = ({ slug }) => {
         mainPhoto,
         additionalPhotos,
         youtubeEmbeddingCode,
+        volunteer,
     } = pet.fields;
 
     return (
         <>
-            <ProfileCard name={name} sex={sex} size={size} description={description} />
+            <ProfileCard
+                name={name}
+                sex={sex}
+                size={size}
+                description={description}
+                volunteer={volunteer}
+            />
             <ProfilePhotoGallery
                 mainPhotoUrl={mainPhoto.fields.file.url}
                 additionalPhotos={additionalPhotos}
