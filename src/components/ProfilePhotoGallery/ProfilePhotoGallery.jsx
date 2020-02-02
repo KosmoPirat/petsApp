@@ -1,8 +1,9 @@
 import { h } from 'preact';
-import { useState, useCallback, useRef, useEffect } from 'preact/hooks';
+import { useState, useCallback, useRef, useEffect, useMemo } from 'preact/hooks';
 import PropTypes from 'prop-types';
 import style from './ProfilePhotoGallery.css';
 import ProfileAdditionalPhoto from '../ProfileAdditionalPhoto/ProfileAdditionalPhoto';
+import Utils from '../../helpers/utils';
 
 const ProfilePhotoGallery = ({ additionalPhotos, youtubeEmbeddingCode }) => {
     const [modalImage, changeModalImage] = useState();
@@ -30,6 +31,10 @@ const ProfilePhotoGallery = ({ additionalPhotos, youtubeEmbeddingCode }) => {
     useEffect(() => {
         changeFlexHeight(flexRef.current.clientHeight);
     }, []);
+
+    const safeEmbeddingCode = useMemo(() => ({ __html: Utils.preventXSS(youtubeEmbeddingCode) }), [
+        youtubeEmbeddingCode,
+    ]);
 
     return (
         <>
@@ -59,10 +64,10 @@ const ProfilePhotoGallery = ({ additionalPhotos, youtubeEmbeddingCode }) => {
                             onImageClick={showModal}
                         />
                     ))}
-                {youtubeEmbeddingCode !== '' && (
+                {safeEmbeddingCode !== '' && (
                     <div
                         className={style['profile-photo-gallery__video']}
-                        dangerouslySetInnerHTML={{ __html: youtubeEmbeddingCode }}
+                        dangerouslySetInnerHTML={safeEmbeddingCode}
                     />
                 )}
             </div>

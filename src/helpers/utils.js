@@ -8,6 +8,14 @@ class Utils {
         const secondTwoDigitPart = strPhone.slice(9);
         return `+${countryCode} (${operatorCode}) ${threeDigitPart}-${firstTwoDigitPart}-${secondTwoDigitPart}`;
     };
+
+    static preventXSS = html => {
+        if (!html.startsWith('<iframe ')) {
+            return '';
+        }
+
+        return html.replace(/>.+<\/iframe>/, '></iframe>');
+    };
 }
 
 export default Utils;
