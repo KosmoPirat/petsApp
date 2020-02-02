@@ -5,6 +5,7 @@ import { route } from 'preact-router';
 import contentfulClient from '../../helpers/contentful/contentfulClient';
 import ProfileCard from '../ProfileCard/ProfileCard';
 import ProfilePhotoGallery from '../ProfilePhotoGallery/ProfilePhotoGallery';
+import Document from '../../helpers/documentHelper';
 
 const PetProfileLayout = ({ slug }) => {
     const [pet, changePet] = useState(false);
@@ -18,6 +19,7 @@ const PetProfileLayout = ({ slug }) => {
 
             changePet(petFromApi);
             changeIsPetLoaded(true);
+            Document.setTitle(petFromApi.fields.name);
         });
     }, []);
 
