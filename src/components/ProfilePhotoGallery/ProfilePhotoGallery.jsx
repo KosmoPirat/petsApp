@@ -1,10 +1,13 @@
 import { h } from 'preact';
-import { useState, useCallback } from 'preact/hooks';
+import { useState, useCallback, useRef, useEffect } from 'preact/hooks';
 import PropTypes from 'prop-types';
 import style from './ProfilePhotoGallery.css';
+import ProfileAdditionalPhoto from '../ProfileAdditionalPhoto/ProfileAdditionalPhoto';
 
-const ProfilePhotoGallery = ({ mainPhotoUrl, additionalPhotos, youtubeEmbeddingCode }) => {
-    const [modalImage, changeModalImage] = useState(undefined);
+const ProfilePhotoGallery = ({ additionalPhotos, youtubeEmbeddingCode }) => {
+    const [modalImage, changeModalImage] = useState();
+    const [flexHeight, changeFlexHeight] = useState(0);
+    const flexRef = useRef();
 
     const hideModal = useCallback(e => {
         if (e.key && e.key !== 'Escape') {
@@ -12,7 +15,7 @@ const ProfilePhotoGallery = ({ mainPhotoUrl, additionalPhotos, youtubeEmbeddingC
         }
 
         document.removeEventListener('keydown', hideModal, false);
-        changeModalImage(undefined);
+        changeModalImage();
     });
 
     const showModal = useCallback(e => {
@@ -24,14 +27,12 @@ const ProfilePhotoGallery = ({ mainPhotoUrl, additionalPhotos, youtubeEmbeddingC
         changeModalImage(e.target.currentSrc || e.target.firstElementChild.currentSrc);
     });
 
+    useEffect(() => {
+        changeFlexHeight(flexRef.current.clientHeight);
+    }, []);
+
     return (
         <>
-            {youtubeEmbeddingCode !== '' && (
-                <div
-                    className={style['profile-photo-gallery__video']}
-                    dangerouslySetInnerHTML={{ __html: youtubeEmbeddingCode }}
-                />
-            )}
             <div className={`modal ${modalImage !== undefined ? 'is-active' : ''}`}>
                 <switch className="modal-background" onClick={hideModal} onKeyDown={hideModal} />
                 <div className="modal-content">
@@ -48,29 +49,28 @@ const ProfilePhotoGallery = ({ mainPhotoUrl, additionalPhotos, youtubeEmbeddingC
                 />
             </div>
 
-            <div className={style['profile-photo-gallery__grid']}>
-                <figure className="image">
-                    <switch onClick={showModal} onKeyDown={showModal} tabIndex={1}>
-                        <img src={mainPhotoUrl} alt="Фотография питомца" />
-                    </switch>
-                </figure>
+            <div className={style['profile-photo-gallery__grid']} ref={flexRef}>
                 {additionalPhotos.length !== 0 &&
-                    additionalPhotos.map(photo => {
-                        return (
-                            <figure className="image">
-                                <switch onClick={showModal} onKeyDown={showModal} tabIndex={3}>
-                                    <img src={photo.fields.file.url} alt="Фотография питомца" />
-                                </switch>
-                            </figure>
-                        );
-                    })}
+                    additionalPhotos.map((photo, index) => (
+                        <ProfileAdditionalPhoto
+                            indexKey={index}
+                            file={photo.fields.file}
+                            height={flexHeight}
+                            onImageClick={showModal}
+                        />
+                    ))}
+                {youtubeEmbeddingCode !== '' && (
+                    <div
+                        className={style['profile-photo-gallery__video']}
+                        dangerouslySetInnerHTML={{ __html: youtubeEmbeddingCode }}
+                    />
+                )}
             </div>
         </>
     );
 };
 
 ProfilePhotoGallery.propTypes = {
-    mainPhotoUrl: PropTypes.string.isRequired,
     additionalPhotos: PropTypes.arrayOf(
         PropTypes.shape({
             fields: PropTypes.shape({

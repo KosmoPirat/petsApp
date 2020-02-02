@@ -4,7 +4,7 @@ module.exports = {
         browser: true,
     },
     extends: ['airbnb', 'plugin:prettier/recommended', 'prettier/react'],
-    plugins: ['import', 'react', 'jsx-a11y'],
+    plugins: ['import', 'react'],
     parser: 'babel-eslint',
     parserOptions: {
         ecmaVersion: 6,
@@ -19,6 +19,6 @@ module.exports = {
         }
     },
     rules: {
-        'jsx-a11y/tabindex-no-positive': 'off'
+        'react/no-danger': 'off' // For youtube video embedding. XSS protection implemented
     }
 };
