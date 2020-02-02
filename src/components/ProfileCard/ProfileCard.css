@@ -3,9 +3,27 @@
 }
 
 .profile-card__description {
+    display: flex;
     padding: 30px;
+    width: 900px;
+    height: 100%;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
-.profile-card__contacts {
-    line-height: 40px;
+.profile-card__row {
+    display: flex;
+    justify-content: space-between;
+    height: 40px;
+    align-items: center;
+    margin-top: 40px;
+}
+
+.profile-card__layout {
+    display: flex;
+}
+
+.profile-card__avatar-image {
+    display: flex;
+    align-items: center;
 }

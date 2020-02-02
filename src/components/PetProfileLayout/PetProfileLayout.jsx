@@ -44,6 +44,7 @@ const PetProfileLayout = ({ slug }) => {
                 size={size}
                 description={description}
                 volunteer={volunteer}
+                mainPhotoUrl={mainPhoto.fields.file.url}
             />
             <ProfilePhotoGallery
                 mainPhotoUrl={mainPhoto.fields.file.url}
