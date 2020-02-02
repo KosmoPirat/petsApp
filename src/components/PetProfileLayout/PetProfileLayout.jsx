@@ -25,12 +25,15 @@ const PetProfileLayout = ({ slug }) => {
         return null;
     }
 
-    const { name, sex, size, description } = pet.fields;
+    const { name, sex, size, description, mainPhoto, additionalPhotos } = pet.fields;
 
     return (
         <>
             <ProfileCard name={name} sex={sex} size={size} description={description} />
-            <ProfilePhotoGallery mainPhotoUrl={pet.fields.mainPhoto.fields.file.url} />
+            <ProfilePhotoGallery
+                mainPhotoUrl={mainPhoto.fields.file.url}
+                additionalPhotos={additionalPhotos}
+            />
         </>
     );
 };

@@ -50,7 +50,6 @@
     },
     "dependencies": {
         "bulma": "0.8.0",
-        "classnames": "2.2.6",
         "contentful": "7.13.1",
         "preact": "10.2.1",
         "preact-render-to-string": "5.1.3",
