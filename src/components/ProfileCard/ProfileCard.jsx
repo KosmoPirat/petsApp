@@ -28,7 +28,7 @@ const ProfileCard = ({ name, sex, size, description, volunteer }) => {
                     </button>
                 )}
                 {volunteer && contactsShown && (
-                    <p className="subtitle is-5">
+                    <p className={`subtitle is-5 ${style['profile-card__contacts']}`}>
                         <a href={`tel:+${volunteer.fields.phone}`}>
                             {Utils.formatPhone(volunteer.fields.phone)}
                         </a>

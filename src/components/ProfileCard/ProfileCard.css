@@ -5,3 +5,7 @@
 .profile-card__description {
     padding: 30px;
 }
+
+.profile-card__contacts {
+    line-height: 40px;
+}
