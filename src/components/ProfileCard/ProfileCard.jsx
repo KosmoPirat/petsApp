@@ -2,8 +2,8 @@ import { h } from 'preact';
 import PropTypes from 'prop-types';
 import { useState, useCallback } from 'preact/hooks';
 import style from './ProfileCard.css';
-import Utils from '../../helpers/utils';
 import SocialMedia from '../SocialMedia/SocialMedia';
+import VolunteerInfo from '../VolunteerInfo/VolunteerInfo';
 
 const ProfileCard = ({ name, sex, size, description, volunteer, mainPhotoUrl }) => {
     const [contactsShown, changeShowContacts] = useState(false);
@@ -27,25 +27,11 @@ const ProfileCard = ({ name, sex, size, description, volunteer, mainPhotoUrl }) 
                             <p className="subtitle is-5">{description}</p>
                         </div>
                         <div className={style['profile-card__row']}>
-                            {volunteer && !contactsShown && (
-                                <button
-                                    className="button is-rounded is-info"
-                                    onClick={showContacts}
-                                    onKeyPress={showContacts}
-                                    type="button"
-                                >
-                                    Показать контакты
-                                </button>
-                            )}
-                            {volunteer && contactsShown && (
-                                <p>
-                                    <a href={`tel:+${volunteer.fields.phone}`}>
-                                        {Utils.formatPhone(volunteer.fields.phone)}
-                                    </a>
-                                    <strong>{` ${volunteer.fields.name}`}</strong>
-                                </p>
-                            )}
-                            {!volunteer && <div />}
+                            <VolunteerInfo
+                                volunteer={volunteer}
+                                contactsShown={contactsShown}
+                                showContacts={showContacts}
+                            />
                             <SocialMedia />
                         </div>
                     </div>
