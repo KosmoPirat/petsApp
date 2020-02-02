@@ -3,7 +3,7 @@ import { useState, useCallback } from 'preact/hooks';
 import PropTypes from 'prop-types';
 import style from './ProfilePhotoGallery.css';
 
-const ProfilePhotoGallery = ({ mainPhotoUrl, additionalPhotos }) => {
+const ProfilePhotoGallery = ({ mainPhotoUrl, additionalPhotos, youtubeEmbeddingCode }) => {
     const [modalImage, changeModalImage] = useState(undefined);
 
     const hideModal = useCallback(e => {
@@ -26,6 +26,12 @@ const ProfilePhotoGallery = ({ mainPhotoUrl, additionalPhotos }) => {
 
     return (
         <>
+            {youtubeEmbeddingCode !== '' && (
+                <div
+                    className={style['profile-photo-gallery__video']}
+                    dangerouslySetInnerHTML={{ __html: youtubeEmbeddingCode }}
+                />
+            )}
             <div className={`modal ${modalImage !== undefined ? 'is-active' : ''}`}>
                 <switch className="modal-background" onClick={hideModal} onKeyDown={hideModal} />
                 <div className="modal-content">
@@ -74,10 +80,12 @@ ProfilePhotoGallery.propTypes = {
             }),
         })
     ),
+    youtubeEmbeddingCode: PropTypes.string,
 };
 
 ProfilePhotoGallery.defaultProps = {
     additionalPhotos: [],
+    youtubeEmbeddingCode: '',
 };
 
 export default ProfilePhotoGallery;

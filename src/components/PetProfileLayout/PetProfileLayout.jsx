@@ -25,7 +25,15 @@ const PetProfileLayout = ({ slug }) => {
         return null;
     }
 
-    const { name, sex, size, description, mainPhoto, additionalPhotos } = pet.fields;
+    const {
+        name,
+        sex,
+        size,
+        description,
+        mainPhoto,
+        additionalPhotos,
+        youtubeEmbeddingCode,
+    } = pet.fields;
 
     return (
         <>
@@ -33,6 +41,7 @@ const PetProfileLayout = ({ slug }) => {
             <ProfilePhotoGallery
                 mainPhotoUrl={mainPhoto.fields.file.url}
                 additionalPhotos={additionalPhotos}
+                youtubeEmbeddingCode={youtubeEmbeddingCode}
             />
         </>
     );
