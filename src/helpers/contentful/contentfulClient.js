@@ -11,7 +11,9 @@ class ContentfulClient {
     }
 
     async getAllPets() {
-        const allPets = await this.client.getEntries();
+        const allPets = await this.client.getEntries({
+            content_type: 'pet',
+        });
         return allPets;
     }
 

@@ -1,12 +1,14 @@
 import { h } from 'preact';
-
 import { useEffect, useState, useMemo } from 'preact/hooks';
+
+import contentfulClient from '../../helpers/contentful/contentfulClient';
+import SearchParamContext from './SearchParamContext';
+import Document from '../../helpers/documentHelper';
+
 import PetsGrid from '../PetsGrid/PetsGrid';
 import PetsFilterLayout from '../PetsFilterLayout/PetsFilterLayout';
-import SearchParamContext from './SearchParamContext';
 
 import style from './PetsLayout.css';
-import contentfulClient from '../../helpers/contentful/contentfulClient';
 
 const PetsLayout = () => {
     const [petItems, changePetItems] = useState([]);
@@ -35,6 +37,9 @@ const PetsLayout = () => {
             changeArePetsLoaded(true);
         });
     }, [searchByName, searchBySex, searchBySize]);
+    useEffect(() => {
+        Document.setTitle('Наши питомцы');
+    }, []);
 
     return (
         <div className={style['pets-layout']}>
