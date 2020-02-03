@@ -17,5 +17,8 @@ module.exports = {
         react: {
             pragma: "h"
         }
+    },
+    rules: {
+        'react/no-danger': 'off' // For youtube video embedding. XSS protection implemented
     }
 };
