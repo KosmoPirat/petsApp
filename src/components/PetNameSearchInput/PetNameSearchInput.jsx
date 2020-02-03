@@ -9,17 +9,12 @@ const PetNameSearchInput = () => {
     const searchBy = useContext(SearchParamContext);
     const [isLoading, changeIsLoading] = useState(false);
     const onChange = useCallback(
-        throttle(
-            () => {
-                changeIsLoading(true);
-                searchBy.name(input.current.value);
-            },
-            1000,
-            changeIsLoading
-        ),
+        throttle(() => {
+            searchBy.name(input.current.value);
+            changeIsLoading(false);
+        }, 1000),
         [input]
     );
-
     return (
         <div className={`control ${isLoading ? 'is-loading' : ''}`}>
             <input

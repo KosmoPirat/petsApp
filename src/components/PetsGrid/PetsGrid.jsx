@@ -7,9 +7,11 @@ const PetsGrid = pets => {
     if (!pets.petsList.length) {
         return (
             <div>
-                По запросу{' '}
-                <span className={style['search-request_error']}>{pets.searchRequest}</span> ничего
-                не найдено!
+                {'По запросу '}
+                <strong>
+                    <i>{pets.searchRequest}</i>
+                </strong>
+                {' ничего не найдено!'}
             </div>
         );
     }

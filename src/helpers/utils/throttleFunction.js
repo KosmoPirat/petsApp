@@ -2,7 +2,7 @@ function throttle(...args) {
     let isThrottled = false;
     let savedArgs;
     let savedThis;
-    const [func, ms, changeIsLoading] = args;
+    const [func, ms] = args;
 
     function wrapper() {
         if (isThrottled) {
@@ -22,7 +22,6 @@ function throttle(...args) {
                 savedArgs = null;
                 savedThis = null;
             }
-            changeIsLoading(false);
         }, ms);
     }
     return wrapper;
