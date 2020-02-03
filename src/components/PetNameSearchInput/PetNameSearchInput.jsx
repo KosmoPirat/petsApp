@@ -7,15 +7,15 @@ import Utils from '../../helpers/utils';
 const PetNameSearchInput = () => {
     const input = useRef('');
     const searchParam = useContext(SearchParamContext);
-    console.log(`render ${searchParam.searchValues.isLoading}`);
     const onChange = useCallback(
         Utils.throttle(() => {
+            searchParam.searchMethods.changeStatusLoading(true);
             searchParam.searchMethods.searchByName(input.current.value);
         }, 1000),
         [input]
     );
     return (
-        <div className={`control ${searchParam.searchValues.isLoading ? 'is-loading' : ''}`}>
+        <div className={`control ${searchParam.searchValues.isRequestLoading ? 'is-loading' : ''}`}>
             <input
                 className="input"
                 type="text"

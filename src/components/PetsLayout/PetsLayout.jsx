@@ -16,18 +16,20 @@ const PetsLayout = () => {
     const [sexSearchParam, changeSexSearchParam] = useState('');
     const [sizeSearchParam, changeSizeSearchParam] = useState('');
     const [isLoading, changeIsLoading] = useState(false);
+    const [isRequestLoading, changeIsRequestLoading] = useState(false);
     const searchParams = useMemo(
         () => ({
             searchMethods: {
                 searchByName: changeNameSearchParam,
                 searchBySex: changeSexSearchParam,
                 searchBySize: changeSizeSearchParam,
+                changeStatusLoading: changeIsRequestLoading,
             },
             searchValues: {
-                isLoading,
+                isRequestLoading,
             },
         }),
-        [changeNameSearchParam, changeSexSearchParam, changeSizeSearchParam, isLoading]
+        [changeNameSearchParam, changeSexSearchParam, changeSizeSearchParam, isRequestLoading]
     );
 
     useEffect(() => {
@@ -40,8 +42,8 @@ const PetsLayout = () => {
         contentfulClient.getFilteredPetsList(requestParams).then(pets => {
             changePetItems(pets.items);
             changeIsLoading(true);
+            changeIsRequestLoading(false);
         });
-        changeIsLoading(false);
     }, [nameSearchParam, sexSearchParam, sizeSearchParam]);
     useEffect(() => {
         Document.setTitle('Наши питомцы');
