@@ -1,8 +1,13 @@
 import { createContext } from 'preact';
 
 const SearchParamContext = createContext({
-    name: undefined,
-    sex: undefined,
-    size: undefined,
+    searchMethods: {
+        searchByName: undefined,
+        searchBySex: undefined,
+        searchBySize: undefined,
+    },
+    searchValues: {
+        isLoading: false,
+    },
 });
 export default SearchParamContext;

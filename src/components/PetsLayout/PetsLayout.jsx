@@ -12,31 +12,39 @@ import style from './PetsLayout.css';
 
 const PetsLayout = () => {
     const [petItems, changePetItems] = useState([]);
-    const [searchByName, changeSearchByName] = useState('');
-    const [searchBySex, changeSearchBySex] = useState('');
-    const [searchBySize, changeSearchBySize] = useState('');
+    const [nameSearchParam, changeNameSearchParam] = useState('');
+    const [sexSearchParam, changeSexSearchParam] = useState('');
+    const [sizeSearchParam, changeSizeSearchParam] = useState('');
     const [arePetsLoaded, changeArePetsLoaded] = useState(false);
+    const [isRequestLoading, changeIsRequestLoading] = useState(false);
     const searchParams = useMemo(
         () => ({
-            name: changeSearchByName,
-            sex: changeSearchBySex,
-            size: changeSearchBySize,
+            searchMethods: {
+                searchByName: changeNameSearchParam,
+                searchBySex: changeSexSearchParam,
+                searchBySize: changeSizeSearchParam,
+            },
+            searchValues: {
+                isLoading: isRequestLoading,
+            },
         }),
-        [changeSearchByName, changeSearchBySex, changeSearchBySize]
+        [changeNameSearchParam, changeSexSearchParam, changeSizeSearchParam, isRequestLoading]
     );
 
     useEffect(() => {
         const requestParams = {
-            'fields.name[match]': searchByName,
-            'fields.size': searchBySize,
-            'fields.sex': searchBySex,
+            'fields.name[match]': nameSearchParam,
+            'fields.size': sizeSearchParam,
+            'fields.sex': sexSearchParam,
         };
 
         contentfulClient.getFilteredPetsList(requestParams).then(pets => {
             changePetItems(pets.items);
             changeArePetsLoaded(true);
+            changeIsRequestLoading(true);
         });
-    }, [searchByName, searchBySex, searchBySize]);
+        changeIsRequestLoading(false);
+    }, [nameSearchParam, sexSearchParam, sizeSearchParam]);
     useEffect(() => {
         Document.setTitle('Наши питомцы');
     }, []);
@@ -47,7 +55,7 @@ const PetsLayout = () => {
                 <PetsFilterLayout />
             </SearchParamContext.Provider>
             {arePetsLoaded ? (
-                <PetsGrid petsList={petItems} searchRequest={searchByName} />
+                <PetsGrid petsList={petItems} searchRequest={nameSearchParam} />
             ) : (
                 <div>Loading...</div>
             )}

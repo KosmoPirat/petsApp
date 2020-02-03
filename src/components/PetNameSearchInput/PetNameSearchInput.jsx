@@ -1,17 +1,21 @@
 import { h } from 'preact';
 
-import { useRef, useContext, useState, useCallback } from 'preact/hooks';
+import { useRef, useContext, useState, useEffect, useCallback } from 'preact/hooks';
 import SearchParamContext from '../PetsLayout/SearchParamContext';
-import throttle from '../../helpers/utils/throttleFunction';
+import Utils from '../../helpers/utils';
 
 const PetNameSearchInput = () => {
     const input = useRef('');
-    const searchBy = useContext(SearchParamContext);
+    const searchParam = useContext(SearchParamContext);
     const [isLoading, changeIsLoading] = useState(false);
+    useEffect(() => {
+        changeIsLoading(false);
+    }, [searchParam.searchValues.isLoading]);
+
     const onChange = useCallback(
-        throttle(() => {
-            searchBy.name(input.current.value);
-            changeIsLoading(false);
+        Utils.throttle(() => {
+            changeIsLoading(true);
+            searchParam.searchMethods.searchByName(input.current.value);
         }, 1000),
         [input]
     );
