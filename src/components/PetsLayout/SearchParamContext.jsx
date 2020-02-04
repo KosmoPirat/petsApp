@@ -5,10 +5,10 @@ const SearchParamContext = createContext({
         searchByName: undefined,
         searchBySex: undefined,
         searchBySize: undefined,
-        changeStatusLoading: undefined,
+        changeIsLoading: undefined,
     },
     searchValues: {
-        isRequestLoading: false,
+        changeIsLoading: false,
     },
 });
 export default SearchParamContext;

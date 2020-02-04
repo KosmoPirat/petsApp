@@ -16,20 +16,19 @@ const PetsLayout = () => {
     const [sexSearchParam, changeSexSearchParam] = useState('');
     const [sizeSearchParam, changeSizeSearchParam] = useState('');
     const [isLoading, changeIsLoading] = useState(false);
-    const [isRequestLoading, changeIsRequestLoading] = useState(false);
     const searchParams = useMemo(
         () => ({
             searchMethods: {
                 searchByName: changeNameSearchParam,
                 searchBySex: changeSexSearchParam,
                 searchBySize: changeSizeSearchParam,
-                changeStatusLoading: changeIsRequestLoading,
+                changeIsLoading,
             },
             searchValues: {
-                isRequestLoading,
+                isLoading,
             },
         }),
-        [changeNameSearchParam, changeSexSearchParam, changeSizeSearchParam, isRequestLoading]
+        [changeNameSearchParam, changeSexSearchParam, changeSizeSearchParam, isLoading]
     );
 
     useEffect(() => {
@@ -41,8 +40,7 @@ const PetsLayout = () => {
 
         contentfulClient.getFilteredPetsList(requestParams).then(pets => {
             changePetItems(pets.items);
-            changeIsLoading(true);
-            changeIsRequestLoading(false);
+            changeIsLoading(false);
         });
     }, [nameSearchParam, sexSearchParam, sizeSearchParam]);
     useEffect(() => {
@@ -54,7 +52,7 @@ const PetsLayout = () => {
             <SearchParamContext.Provider value={searchParams}>
                 <PetsFilterLayout />
             </SearchParamContext.Provider>
-            {isLoading ? (
+            {!isLoading ? (
                 <PetsGrid petsList={petItems} searchRequest={nameSearchParam} />
             ) : (
                 <div>Loading...</div>

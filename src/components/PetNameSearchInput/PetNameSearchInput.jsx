@@ -9,13 +9,13 @@ const PetNameSearchInput = () => {
     const searchParam = useContext(SearchParamContext);
     const onChange = useCallback(
         Utils.throttle(() => {
-            searchParam.searchMethods.changeStatusLoading(true);
+            searchParam.searchMethods.changeIsLoading(true);
             searchParam.searchMethods.searchByName(input.current.value);
         }, 1000),
         [input]
     );
     return (
-        <div className={`control ${searchParam.searchValues.isRequestLoading ? 'is-loading' : ''}`}>
+        <div className={`control ${searchParam.searchValues.isLoading ? 'is-loading' : ''}`}>
             <input
                 className="input"
                 type="text"
