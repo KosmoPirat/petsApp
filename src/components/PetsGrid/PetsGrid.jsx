@@ -1,36 +1,26 @@
 import { h } from 'preact';
-import { useState, useEffect } from 'preact/hooks';
-import contentfulClient from '../../helpers/contentful/contentfulClient';
 import GridCard from '../GridCard/GridCard';
 
 import style from './PetsGrid.css';
 
-const PetsGrid = () => {
-    const [petItems, changePetItems] = useState([]);
-    const [arePetsLoaded, changeArePetsLoaded] = useState(false);
-
-    useEffect(() => {
-        contentfulClient.getAllPets().then(pets => {
-            changePetItems(pets.items);
-            changeArePetsLoaded(true);
-        });
-    }, []);
-
-    if (!arePetsLoaded) {
-        return null;
+const PetsGrid = pets => {
+    if (!pets.petsList.length) {
+        return (
+            <div>
+                {'По запросу '}
+                <strong>
+                    <i>{pets.searchRequest}</i>
+                </strong>
+                {' ничего не найдено!'}
+            </div>
+        );
     }
 
-    return (
-        <section className={style['pets-grid']}>
-            {petItems.map(pet => (
-                <GridCard
-                    slug={pet.fields.slug}
-                    name={pet.fields.name}
-                    mainPhoto={pet.fields.mainPhoto}
-                />
-            ))}
-        </section>
-    );
+    const listOfPets = pets.petsList.map(pet => (
+        <GridCard slug={pet.fields.slug} name={pet.fields.name} mainPhoto={pet.fields.mainPhoto} />
+    ));
+
+    return <section className={style['pets-grid']}>{listOfPets}</section>;
 };
 
 export default PetsGrid;
