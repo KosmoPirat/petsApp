@@ -5,7 +5,6 @@ const SearchParamContext = createContext({
         searchByName: undefined,
         searchBySex: undefined,
         searchBySize: undefined,
-        changeIsLoading: undefined,
     },
     searchValues: {
         changeIsLoading: false,

@@ -9,7 +9,6 @@ const PetNameSearchInput = () => {
     const searchParam = useContext(SearchParamContext);
     const onChange = useCallback(
         Utils.throttle(() => {
-            searchParam.searchMethods.changeIsLoading(true);
             searchParam.searchMethods.searchByName(input.current.value);
         }, 1000),
         [input]

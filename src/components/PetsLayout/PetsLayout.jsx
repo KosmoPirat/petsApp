@@ -22,7 +22,6 @@ const PetsLayout = () => {
                 searchByName: changeNameSearchParam,
                 searchBySex: changeSexSearchParam,
                 searchBySize: changeSizeSearchParam,
-                changeIsLoading,
             },
             searchValues: {
                 isLoading,
@@ -37,7 +36,7 @@ const PetsLayout = () => {
             'fields.size': sizeSearchParam,
             'fields.sex': sexSearchParam,
         };
-
+        changeIsLoading(true);
         contentfulClient.getFilteredPetsList(requestParams).then(pets => {
             changePetItems(pets.items);
             changeIsLoading(false);
