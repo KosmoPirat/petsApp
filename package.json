@@ -7,7 +7,7 @@
         "build": "preact build",
         "serve": "preact build && preact serve",
         "dev": "preact watch",
-        "precommit": "lint-staged"
+        "prepush": "lint-staged"
     },
     "browserslist": [
         "> 1%",
@@ -15,7 +15,7 @@
     ],
     "husky": {
         "hooks": {
-            "pre-commit": "npm run precommit"
+            "pre-push": "npm run prepush"
         }
     },
     "lint-staged": {

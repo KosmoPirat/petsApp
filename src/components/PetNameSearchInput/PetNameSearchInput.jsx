@@ -11,7 +11,7 @@ const PetNameSearchInput = () => {
         Utils.throttle(() => {
             searchParam.searchMethods.searchByName(input.current.value);
         }, 1000),
-        [input]
+        []
     );
     return (
         <div className={`control ${searchParam.searchValues.isLoading ? 'is-loading' : ''}`}>
