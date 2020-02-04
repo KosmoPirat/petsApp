@@ -14,7 +14,7 @@ const PetNameSearchInput = () => {
         []
     );
 
-        console.log('asdasd')
+        console.log('asdasddsadsasda')
 
     return (
         <div className={`control ${searchParam.searchValues.isLoading ? 'is-loading' : ''}`}>
