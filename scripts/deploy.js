@@ -1,12 +1,11 @@
-const dotenv = require('dotenv').config().parsed;
 const FtpDeploy = require("ftp-deploy");
 const ftpDeploy = new FtpDeploy();
- 
+
 const config = {
-    user: dotenv.FTPUser,
+    user: process.env.FTPUser,
     // Password optional, prompted if none given
-    password: dotenv.FTPPassword,
-    host: dotenv.FTPServer,
+    password: process.env.FTPPassword,
+    host: process.env.FTPServer,
     localRoot: __dirname + "/../build",
     remoteRoot: "/public_html/remote-folder/",
     // include: ["*", "**/*"],      // this would upload everything except dot files
@@ -16,7 +15,6 @@ const config = {
     // Passive mode is forced (EPSV command is not sent)
     forcePasv: true
 };
-console.log(dotenv);
  
 // use with promises
 ftpDeploy
