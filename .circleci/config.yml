@@ -27,4 +27,4 @@ workflows:
                         - master
             - deploy:
                 requires:
-                    - build: # Only run deploy job once the build job has completed
+                    - build # Only run deploy job once the build job has completed
