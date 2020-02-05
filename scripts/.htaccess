@@ -1,0 +1,37 @@
+<IfModule mod_rewrite.c>
+
+    RewriteEngine On
+    ### Start - Redirect all requests to index Rule
+    RewriteBase /
+    RewriteRule ^index\.html$ - [L]
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-l
+    RewriteRule . /index.html [L]
+    ### End - Redirect all requests to index Rule
+
+    ### Start - No index Rule
+    RewriteCond %{HTTP_USER_AGENT} !^yandex.* [NC,OR]
+    RewriteCond %{HTTP_USER_AGENT} !^googlebot.* [NC,OR]
+    RewriteCond %{HTTP_USER_AGENT} !^gaisbot.* [NC,OR]
+    RewriteCond %{HTTP_USER_AGENT} !^rambler.* [NC,OR]
+    RewriteCond %{HTTP_USER_AGENT} !^aport.* [NC,OR]
+    RewriteCond %{HTTP_USER_AGENT} !^metacrawler.* [NC,OR]
+    RewriteCond %{HTTP_USER_AGENT} !^msnbot.* [NC,OR]
+    RewriteCond %{HTTP_USER_AGENT} !^crawler.* [NC]
+    RewriteRule .* - [R=404]
+    ### End - No index Rule
+
+    ### Start - Delete www  Rule
+    RewriteCond %{ENV:HTTPS} on
+    RewriteRule .* - [E=SSL:s]
+    RewriteCond %{HTTP_HOST} ^www\.(.*) [NC]
+    RewriteRule ^(.*)$ http%{ENV:SSL}://%1/$1 [R=301,L]
+    ### End - Delete www  Rule
+
+    ### Start - Redirect from HTTPS to HTTP Rule
+    RewriteCond %{HTTPS} on
+    RewriteRule ^.*$ http://%{SERVER_NAME}%{REQUEST_URI} [R=301,L]
+    ### End - Redirect from HTTPS to HTTP Rule
+
+</IfModule>
