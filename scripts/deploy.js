@@ -1,7 +1,9 @@
 const dotenv = require('dotenv').config().parsed;
 const FtpDeploy = require("ftp-deploy");
 const ftpDeploy = new FtpDeploy();
- 
+
+console.log(dotenv);
+
 const config = {
     user: dotenv.FTPUser,
     // Password optional, prompted if none given
@@ -16,7 +18,6 @@ const config = {
     // Passive mode is forced (EPSV command is not sent)
     forcePasv: true
 };
-console.log(dotenv);
  
 // use with promises
 ftpDeploy
