@@ -2,12 +2,12 @@ version: 2
 jobs:
    build:
         docker:
-            - image: circleci/node:latest
+            - image: circleci/node:10.15.3
         steps:
             - checkout
             - run: npm ci
-            - run: prettier src/**/*.{js,jsx} --write && node_modules/.bin/eslint src/**/*.{js,jsx} --fix
-            - run: prettier src/**/*.css --write && node_modules/.bin/stylelint src/**/*.css --fix
+            - run: npm run build
+            - run: npm run deploy
             - run: echo "Complete"
 
    workflows:

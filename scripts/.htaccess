@@ -34,8 +34,4 @@
     RewriteRule ^.*$ http://%{SERVER_NAME}%{REQUEST_URI} [R=301,L]
     ### End - Redirect from HTTPS to HTTP Rule
 
-    ### Start - Delete index.html from URL Rule
-    RewriteRule ^(.*)index\.html$ https://%{HTTP_HOST}/$1 [R=301,L]
-    RewriteRule ^(.*)index\.htm$ https://%{HTTP_HOST}/$1 [R=301,L]
-    ### End - Delete index.html from URL Rule
 </IfModule>
