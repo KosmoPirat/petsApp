@@ -1,8 +1,6 @@
-const dotenv = require('dotenv').config();
 const FtpDeploy = require("ftp-deploy");
 const ftpDeploy = new FtpDeploy();
 
-console.log(dotenv);
 const config = {
     user: process.env.FTPUser,
     // Password optional, prompted if none given
