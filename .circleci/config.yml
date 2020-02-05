@@ -7,14 +7,20 @@ jobs:
             - checkout
             - run: npm ci
             - run: npm run build
+            - run: echo "Complete build"
+   deploy:
+        docker:
+            - image: circleci/node:10.15.3
+        steps:
+            - checkout
             - run: npm run deploy
-            - run: echo "Complete"
+            - run: echo "Complete deploy"
 
    workflows:
         version: 2
         deploy:
             jobs:
-                - build:
+                - build
                 - deploy:
                     requires:
                         - build: # Only run deploy job once the build job has completed
