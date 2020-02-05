@@ -16,6 +16,7 @@ const config = {
     // Passive mode is forced (EPSV command is not sent)
     forcePasv: true
 };
+console.log(dotenv);
  
 // use with promises
 ftpDeploy
