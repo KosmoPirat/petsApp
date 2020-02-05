@@ -7,7 +7,7 @@ const MainLayout = () => {
         Document.setTitle('Главная');
     }, []);
 
-    return <div>MainLayout</div>;
+    return <div>MainLayout Test CI</div>;
 };
 
 export default MainLayout;
