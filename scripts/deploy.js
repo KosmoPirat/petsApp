@@ -3,7 +3,7 @@ const FtpDeploy = require("ftp-deploy");
 const ftpDeploy = new FtpDeploy();
 
 console.log(dotenv);
-
+console.log('asdsadas');
 const config = {
     user: dotenv.FTPUser,
     // Password optional, prompted if none given
