@@ -1,4 +1,4 @@
-const dotenv = require('dotenv').config().parsed
+const dotenv = require('dotenv').config().parsed;
 const FtpDeploy = require("ftp-deploy");
 const ftpDeploy = new FtpDeploy();
  
