@@ -15,7 +15,7 @@ workflows:
     build_and_deploy:
         jobs:
             - build:
-                context: pets-app-context
+                context: org-global
                 filters:
                     branches:
                         ignore:
