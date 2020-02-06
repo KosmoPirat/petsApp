@@ -10,7 +10,7 @@ const config = {
     localRoot: __dirname + "/../build",
     remoteRoot: "/public_html/remote-folder/",
     // include: ["*", "**/*"],      // this would upload everything except dot files
-    include: ["*", "**/*"],
+    include: ["*", "**/*",".*"],
     // delete ALL existing files at destination before uploading, if true
     deleteRemote: true,
     // Passive mode is forced (EPSV command is not sent)
