@@ -14,7 +14,7 @@ const PetsLayout = () => {
     const [petItems, changePetItems] = useState([]);
     const [nameSearchParam, changeNameSearchParam] = useState('');
     const [sexSearchParam, changeSexSearchParam] = useState('');
-    const [sizeSearchParam, changeSizeSearchParam] = useState('Большой,Средний,Маленький');
+    const [sizeSearchParam, changeSizeSearchParam] = useState('');
     const [isLoading, changeIsLoading] = useState(false);
     const searchParams = useMemo(
         () => ({
