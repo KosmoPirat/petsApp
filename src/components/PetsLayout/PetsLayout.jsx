@@ -14,7 +14,7 @@ const PetsLayout = () => {
     const [petItems, changePetItems] = useState([]);
     const [nameSearchParam, changeNameSearchParam] = useState('');
     const [sexSearchParam, changeSexSearchParam] = useState('');
-    const [sizeSearchParam, changeSizeSearchParam] = useState('');
+    const [sizeSearchParam, changeSizeSearchParam] = useState('Большой,Средний,Маленький');
     const [isLoading, changeIsLoading] = useState(false);
     const searchParams = useMemo(
         () => ({
@@ -25,6 +25,9 @@ const PetsLayout = () => {
             },
             searchValues: {
                 isLoading,
+                checkboxSmall: 'Маленький',
+                checkboxMedium: 'Средний',
+                checkboxBig: 'Большой',
             },
         }),
         [changeNameSearchParam, changeSexSearchParam, changeSizeSearchParam, isLoading]
@@ -33,7 +36,7 @@ const PetsLayout = () => {
     useEffect(() => {
         const requestParams = {
             'fields.name[match]': nameSearchParam,
-            'fields.size': sizeSearchParam,
+            'fields.size[in]': sizeSearchParam,
             'fields.sex': sexSearchParam,
         };
         changeIsLoading(true);
