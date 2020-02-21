@@ -4,6 +4,8 @@ import { useRef, useContext, useCallback } from 'preact/hooks';
 import SearchParamContext from '../PetsLayout/SearchParamContext';
 import Utils from '../../helpers/utils';
 
+import style from './PetNameSearchInput.css';
+
 const PetNameSearchInput = () => {
     const input = useRef('');
     const searchParam = useContext(SearchParamContext);
@@ -14,7 +16,11 @@ const PetNameSearchInput = () => {
         [input]
     );
     return (
-        <div className={`control ${searchParam.searchValues.isLoading ? 'is-loading' : ''}`}>
+        <div
+            className={`control ${style['pet-name-search-input']} ${
+                searchParam.searchValues.isLoading ? 'is-loading' : ''
+            }`}
+        >
             <input
                 className="input"
                 type="text"

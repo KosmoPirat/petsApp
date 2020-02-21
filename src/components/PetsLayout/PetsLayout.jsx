@@ -16,21 +16,35 @@ const PetsLayout = () => {
     const [sexSearchParam, changeSexSearchParam] = useState('');
     const [sizeSearchParam, changeSizeSearchParam] = useState('');
     const [isLoading, changeIsLoading] = useState(false);
+    const [size, changeSize] = useState([
+        {
+            name: 'Маленький',
+            isChecked: false,
+        },
+        {
+            name: 'Средний',
+            isChecked: false,
+        },
+        {
+            name: 'Большой',
+            isChecked: false,
+        },
+    ]);
+
     const searchParams = useMemo(
         () => ({
             searchMethods: {
                 searchByName: changeNameSearchParam,
                 searchBySex: changeSexSearchParam,
                 searchBySize: changeSizeSearchParam,
+                changeSize,
             },
             searchValues: {
                 isLoading,
-                checkboxSmall: 'Маленький',
-                checkboxMedium: 'Средний',
-                checkboxBig: 'Большой',
+                size,
             },
         }),
-        [changeNameSearchParam, changeSexSearchParam, changeSizeSearchParam, isLoading]
+        [changeNameSearchParam, changeSexSearchParam, changeSizeSearchParam, changeSize, isLoading]
     );
 
     useEffect(() => {
@@ -44,7 +58,8 @@ const PetsLayout = () => {
             changePetItems(pets.items);
             changeIsLoading(false);
         });
-    }, [nameSearchParam, sexSearchParam, sizeSearchParam]);
+    }, [nameSearchParam, sexSearchParam, sizeSearchParam, size]);
+
     useEffect(() => {
         Document.setTitle('Наши питомцы');
     }, []);

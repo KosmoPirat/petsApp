@@ -45,6 +45,15 @@ class Utils {
         };
         return wrapper;
     };
+
+    static getRequest = data => {
+        const defaultRequesr = data.map(item => item.name).toString();
+        const request = data
+            .map(item => (item.isChecked ? item.name : ''))
+            .filter(item => item)
+            .toString();
+        return request || defaultRequesr;
+    };
 }
 
 export default Utils;

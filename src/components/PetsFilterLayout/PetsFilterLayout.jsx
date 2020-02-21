@@ -1,7 +1,7 @@
 import { h } from 'preact';
 
 import PetNameSearchInput from '../PetNameSearchInput/PetNameSearchInput';
-import PetCheckboxSearch from '../SizeCheckboxesSearch/SizeCheckboxesSearch';
+import PetCheckboxSearch from '../SizeButtonsSearch/SizeButtonsSearch';
 
 import style from './PetsFilterLayout.css';
 
