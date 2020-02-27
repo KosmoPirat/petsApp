@@ -1,9 +1,10 @@
 import { h } from 'preact';
 import { useEffect, useState, useMemo } from 'preact/hooks';
 
-import contentfulClient from '../../helpers/contentful/contentfulClient';
 import SearchParamContext from './SearchParamContext';
+import contentfulClient from '../../helpers/contentful/contentfulClient';
 import Document from '../../helpers/documentHelper';
+import Mappers from '../../helpers/mappers';
 
 import PetsGrid from '../PetsGrid/PetsGrid';
 import PetsFilterLayout from '../PetsFilterLayout/PetsFilterLayout';
@@ -14,9 +15,7 @@ const PetsLayout = () => {
     const [petItems, changePetItems] = useState([]);
     const [nameSearchParam, changeNameSearchParam] = useState('');
     const [sexSearchParam, changeSexSearchParam] = useState('');
-    const [sizeSearchParam, changeSizeSearchParam] = useState('');
-    const [isLoading, changeIsLoading] = useState(false);
-    const [size, changeSize] = useState([
+    const [sizeSearchParam, changeSizeSearchParam] = useState([
         {
             name: 'Маленький',
             isChecked: false,
@@ -30,6 +29,7 @@ const PetsLayout = () => {
             isChecked: false,
         },
     ]);
+    const [isLoading, changeIsLoading] = useState(false);
 
     const searchParams = useMemo(
         () => ({
@@ -38,21 +38,19 @@ const PetsLayout = () => {
                 searchBySex: changeSexSearchParam,
                 searchBySize: changeSizeSearchParam,
             },
-            changeRequestParams: {
-                changeSize,
-            },
             searchValues: {
                 isLoading,
-                size,
+                sizeSearchParam,
             },
         }),
-        [changeNameSearchParam, changeSexSearchParam, changeSizeSearchParam, changeSize, isLoading]
+        [changeNameSearchParam, changeSexSearchParam, changeSizeSearchParam, isLoading]
     );
 
     useEffect(() => {
+        const sizeParam = Mappers.mapToSizeRequestParams(sizeSearchParam);
         const requestParams = {
             'fields.name[match]': nameSearchParam,
-            'fields.size[in]': sizeSearchParam,
+            'fields.size[in]': sizeParam,
             'fields.sex': sexSearchParam,
         };
         changeIsLoading(true);
@@ -60,7 +58,7 @@ const PetsLayout = () => {
             changePetItems(pets.items);
             changeIsLoading(false);
         });
-    }, [nameSearchParam, sexSearchParam, sizeSearchParam, size]);
+    }, [nameSearchParam, sexSearchParam, sizeSearchParam]);
 
     useEffect(() => {
         Document.setTitle('Наши питомцы');

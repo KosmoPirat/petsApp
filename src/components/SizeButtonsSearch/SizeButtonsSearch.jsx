@@ -1,19 +1,13 @@
 import { h } from 'preact';
 
-import { useContext, useEffect } from 'preact/hooks';
+import { useContext } from 'preact/hooks';
 import SearchParamContext from '../PetsLayout/SearchParamContext';
 import SizeButton from '../SizeButton/SizeButton';
 
 import style from './SizeButtonsSearch.css';
 
-import mapToSizeRequestParams from '../../helpers/mappers';
-
 const SizeButtonsSearch = () => {
     const searchParam = useContext(SearchParamContext);
-    useEffect(() => {
-        const request = mapToSizeRequestParams(searchParam.searchValues.size);
-        searchParam.searchMethods.searchBySize(request);
-    }, [searchParam.searchValues.size]);
 
     return (
         <>
@@ -21,7 +15,7 @@ const SizeButtonsSearch = () => {
                 Выберите размер питомца
             </p>
             <div className="field has-addons">
-                {searchParam.searchValues.size.map((searchButton, index) => (
+                {searchParam.searchValues.sizeSearchParam.map((searchButton, index) => (
                     <SizeButton sizeIndex={index} />
                 ))}
             </div>

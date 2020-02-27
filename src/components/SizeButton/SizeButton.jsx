@@ -7,26 +7,23 @@ import style from './SizeButton.css';
 
 const SizeButton = ({ sizeIndex }) => {
     const searchParam = useContext(SearchParamContext);
+    const size = searchParam.searchValues.sizeSearchParam[sizeIndex];
     const changeSize = () => {
-        const newSize = searchParam.searchValues.size.map(item =>
-            item.name === searchParam.searchValues.size[sizeIndex].name
+        const newSizes = searchParam.searchValues.sizeSearchParam.map(item =>
+            item.name === size.name
                 ? { name: item.name, isChecked: !item.isChecked }
                 : { name: item.name, isChecked: item.isChecked }
         );
-        searchParam.changeRequestParams.changeSize(newSize);
+        searchParam.searchMethods.searchBySize(newSizes);
     };
     return (
         <p className="control">
             <button
-                className={`button ${
-                    searchParam.searchValues.size[sizeIndex].isChecked ? 'is-success' : ''
-                }`}
+                className={`button ${size.isChecked ? 'is-success' : ''}`}
                 type="button"
                 onClick={changeSize}
             >
-                <span className={style['size-buttom__text']}>
-                    {searchParam.searchValues.size[sizeIndex].name}
-                </span>
+                <span className={style['size-buttom__text']}>{size.name}</span>
             </button>
         </p>
     );
