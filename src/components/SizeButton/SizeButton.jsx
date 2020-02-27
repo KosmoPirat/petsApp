@@ -3,33 +3,37 @@ import { useContext } from 'preact/hooks';
 import PropTypes from 'prop-types';
 import SearchParamContext from '../PetsLayout/SearchParamContext';
 
-const SizeButton = ({ name, isChecked }) => {
+import style from './SizeButton.css';
+
+const SizeButton = ({ sizeIndex }) => {
     const searchParam = useContext(SearchParamContext);
     const changeSize = () => {
         const newSize = searchParam.searchValues.size.map(item =>
-            item.name === name
+            item.name === searchParam.searchValues.size[sizeIndex].name
                 ? { name: item.name, isChecked: !item.isChecked }
                 : { name: item.name, isChecked: item.isChecked }
         );
-        console.log(newSize);
-        searchParam.searchMethods.changeSize(newSize);
+        searchParam.changeRequestParams.changeSize(newSize);
     };
     return (
         <p className="control">
             <button
-                className={`button is-small is-rounded ${isChecked ? 'is-link' : 'is-info'}`}
+                className={`button ${
+                    searchParam.searchValues.size[sizeIndex].isChecked ? 'is-success' : ''
+                }`}
                 type="button"
                 onClick={changeSize}
             >
-                <span>{name}</span>
+                <span className={style['size-buttom__text']}>
+                    {searchParam.searchValues.size[sizeIndex].name}
+                </span>
             </button>
         </p>
     );
 };
 
 SizeButton.propTypes = {
-    name: PropTypes.string.isRequired,
-    isChecked: PropTypes.bool.isRequired,
+    sizeIndex: PropTypes.number.isRequired,
 };
 
 export default SizeButton;

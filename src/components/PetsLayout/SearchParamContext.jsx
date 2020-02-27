@@ -7,6 +7,9 @@ const SearchParamContext = createContext({
         searchBySize: undefined,
         changeSize: undefined,
     },
+    changeRequestParams: {
+        changeSize: undefined,
+    },
     searchValues: {
         isLoading: false,
         size: [],

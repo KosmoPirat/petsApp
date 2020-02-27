@@ -24,10 +24,17 @@ const PetNameSearchInput = () => {
             <input
                 className="input"
                 type="text"
-                placeholder="Введите имя питомца"
+                placeholder="Введите кличку питомца"
                 ref={input}
                 onInput={onChange}
             />
+            {input.current.value ? (
+                <span className="size-7 has-text-danger">
+                    Поиск осуществяется при вводе не менее двух символов!
+                </span>
+            ) : (
+                ''
+            )}
         </div>
     );
 };

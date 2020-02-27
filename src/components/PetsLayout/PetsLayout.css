@@ -2,6 +2,6 @@
     display: grid;
     height: 100%;
     padding: 15px;
-    grid-template-columns: 250px auto;
+    grid-template-columns: 300px auto;
     gap: 15px;
 }

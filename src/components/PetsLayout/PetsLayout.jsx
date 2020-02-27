@@ -37,6 +37,8 @@ const PetsLayout = () => {
                 searchByName: changeNameSearchParam,
                 searchBySex: changeSexSearchParam,
                 searchBySize: changeSizeSearchParam,
+            },
+            changeRequestParams: {
                 changeSize,
             },
             searchValues: {
