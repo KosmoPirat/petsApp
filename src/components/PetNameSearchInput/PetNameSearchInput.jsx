@@ -15,26 +15,23 @@ const PetNameSearchInput = () => {
         }, 1000),
         [input]
     );
+    const isValid = inputValue => {
+        if (inputValue === undefined || inputValue === '') return '';
+        if (inputValue.length > 1) return 'is-success';
+        return 'is-danger';
+    };
     return (
-        <div
-            className={`control ${style['pet-name-search-input']} ${
-                searchParam.searchValues.isLoading ? 'is-loading' : ''
-            }`}
-        >
-            <input
-                className="input"
-                type="text"
-                placeholder="Введите кличку питомца"
-                ref={input}
-                onInput={onChange}
-            />
-            {input.current.value ? (
-                <span className="size-7 has-text-danger">
-                    Поиск осуществяется при вводе не менее двух символов!
-                </span>
-            ) : (
-                ''
-            )}
+        <div className={style['pet-name-search-input']}>
+            <h5 className="title is-5">Кличка</h5>
+            <div className={`control ${searchParam.searchValues.isLoading ? 'is-loading' : ''}`}>
+                <input
+                    className={`input ${isValid(input.current.value)}`}
+                    type="text"
+                    placeholder="Введите кличку питомца"
+                    ref={input}
+                    onInput={onChange}
+                />
+            </div>
         </div>
     );
 };

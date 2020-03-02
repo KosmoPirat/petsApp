@@ -23,7 +23,7 @@ const SizeButton = ({ sizeIndex }) => {
                 type="button"
                 onClick={changeSize}
             >
-                <span className={style['size-buttom__text']}>{size.name}</span>
+                <span className={style['size-button__text']}>{size.name}</span>
             </button>
         </p>
     );

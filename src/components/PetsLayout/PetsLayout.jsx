@@ -69,11 +69,17 @@ const PetsLayout = () => {
             <SearchParamContext.Provider value={searchParams}>
                 <PetsFilterLayout />
             </SearchParamContext.Provider>
-            {!isLoading ? (
+            <div className={style['pets-layout__overlay']}>
+                <div
+                    className={`
+                        ${style['pets-layout__loader-wrapper']}
+                        ${isLoading ? style['is-active'] : ''}
+                    `}
+                >
+                    <div className={`loader is-loading ${style['pets-layout__loader-size']}`} />
+                </div>
                 <PetsGrid petsList={petItems} searchRequest={nameSearchParam} />
-            ) : (
-                <div>Loading...</div>
-            )}
+            </div>
         </div>
     );
 };
