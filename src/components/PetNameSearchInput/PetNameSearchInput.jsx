@@ -22,7 +22,7 @@ const PetNameSearchInput = () => {
     };
     return (
         <div className={style['pet-name-search-input']}>
-            <h5 className="title is-5">Кличка</h5>
+            <h5 className={`title is-5 ${style['pet-name-search-input__title']}`}>Кличка</h5>
             <div className={`control ${searchParam.searchValues.isLoading ? 'is-loading' : ''}`}>
                 <input
                     className={`input ${isValid(input.current.value)}`}
