@@ -1,0 +1,12 @@
+.pet-name-search-input {
+    margin-bottom: 25px;
+}
+
+.pet-name-search-input__title {
+    margin-bottom: 10px !important;
+}
+
+.control,
+input::placeholder {
+    font-size: 0.8rem;
+}

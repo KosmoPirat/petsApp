@@ -7,7 +7,8 @@ const SearchParamContext = createContext({
         searchBySize: undefined,
     },
     searchValues: {
-        changeIsLoading: false,
+        isLoading: false,
+        sizeSearchParam: [],
     },
 });
 export default SearchParamContext;
