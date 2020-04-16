@@ -14,7 +14,16 @@ import style from './PetsLayout.css';
 const PetsLayout = () => {
     const [petItems, changePetItems] = useState([]);
     const [nameSearchParam, changeNameSearchParam] = useState('');
-    const [sexSearchParam, changeSexSearchParam] = useState('');
+    const [sexSearchParam, changeSexSearchParam] = useState([
+        {
+            name: 'Мальчик',
+            isChecked: false,
+        },
+        {
+            name: 'Девочка',
+            isChecked: false,
+        },
+    ]);
     const [sizeSearchParam, changeSizeSearchParam] = useState([
         {
             name: 'Маленький',
@@ -40,6 +49,7 @@ const PetsLayout = () => {
             },
             searchValues: {
                 isLoading,
+                sexSearchParam,
                 sizeSearchParam,
             },
         }),
@@ -48,10 +58,11 @@ const PetsLayout = () => {
 
     useEffect(() => {
         const sizeParam = Mappers.mapToSizeRequestParams(sizeSearchParam);
+        const sexParam = Mappers.mapToSizeRequestParams(sexSearchParam);
         const requestParams = {
             'fields.name[match]': nameSearchParam,
             'fields.size[in]': sizeParam,
-            'fields.sex': sexSearchParam,
+            'fields.sex[in]': sexParam,
         };
         changeIsLoading(true);
         contentfulClient.getFilteredPetsList(requestParams).then(pets => {
