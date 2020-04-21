@@ -1,27 +1,35 @@
 import { h } from 'preact';
 import { Link } from 'preact-router/match';
+
+import adoptionIcon from './adoption.svg';
 import style from './Header.css';
 
 const Header = () => (
-    <header className={style.header}>
-        <h1 className={style.header__title}>PetsApp</h1>
-        <nav className={style.header__menu}>
+    <nav className={`navbar ${style.header}`} role="navigation" aria-label="main navigation">
+        <div className={`${style.header__logo}`}>
+            <img src={adoptionIcon} className={`${style[`header__logo-image`]}`} alt="Логотип" />
+            <div className="title is-3">Приют собак</div>
+        </div>
+
+        <div className={`navbar-menu ${style.header__menu}`}>
+            <div className={`navbar-item ${style.header__item} ${style.header__item_disabled}`}>
+                Главная
+            </div>
             <Link
-                className={style.header__link}
-                activeClassName={style.header__link_active}
-                href="/"
-            >
-                Main
-            </Link>
-            <Link
-                className={style.header__link}
+                className={`navbar-item ${style.header__item}`}
                 activeClassName={style.header__link_active}
                 href="/pets"
             >
-                Pets
+                Наши питомцы
             </Link>
-        </nav>
-    </header>
+            <div className={`navbar-item ${style.header__item} ${style.header__item_disabled}`}>
+                Новости
+            </div>
+            <div className={`navbar-item ${style.header__item} ${style.header__item_disabled}`}>
+                О приюте
+            </div>
+        </div>
+    </nav>
 );
 
 export default Header;
