@@ -8,6 +8,7 @@ const SearchParamContext = createContext({
     },
     searchValues: {
         isLoading: false,
+        sexSearchParam: [],
         sizeSearchParam: [],
     },
 });
