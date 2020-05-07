@@ -17,6 +17,11 @@ class Utils {
         return html.replace(/>.+<\/iframe>/, '></iframe>');
     };
 
+    static getSkipParam = (amountEl, elStep) => {
+        if (amountEl < elStep) return 0;
+        return elStep;
+    };
+
     static throttle = (...args) => {
         let isThrottled = false;
         let savedArgs;

@@ -2,9 +2,11 @@ import { h } from 'preact';
 import { useEffect, useState, useMemo } from 'preact/hooks';
 
 import SearchParamContext from './SearchParamContext';
+import PaginationContext from './PaginationContext';
 import contentfulClient from '../../helpers/contentful/contentfulClient';
 import Document from '../../helpers/documentHelper';
 import Mappers from '../../helpers/mappers';
+import Utils from '../../helpers/utils';
 
 import PetsGrid from '../PetsGrid/PetsGrid';
 import PetsFilterLayout from '../PetsFilterLayout/PetsFilterLayout';
@@ -13,7 +15,9 @@ import style from './PetsLayout.css';
 
 const PetsLayout = () => {
     const [petItems, changePetItems] = useState([]);
+
     const [nameSearchParam, changeNameSearchParam] = useState('');
+
     const [sexSearchParam, changeSexSearchParam] = useState([
         {
             name: 'Мальчик',
@@ -24,6 +28,7 @@ const PetsLayout = () => {
             isChecked: false,
         },
     ]);
+
     const [sizeSearchParam, changeSizeSearchParam] = useState([
         {
             name: 'Маленький',
@@ -38,7 +43,24 @@ const PetsLayout = () => {
             isChecked: false,
         },
     ]);
+
     const [isLoading, changeIsLoading] = useState(false);
+
+    const [currentPage, chengeCurrentPage] = useState(0);
+
+    const pagePetsLimit = 4;
+
+    const paginationParams = useMemo(
+        () => ({
+            paginationMethods: {
+                changePage: chengeCurrentPage,
+            },
+            paginationValues: {
+                currentPage,
+            },
+        }),
+        [chengeCurrentPage]
+    );
 
     const searchParams = useMemo(
         () => ({
@@ -57,19 +79,27 @@ const PetsLayout = () => {
     );
 
     useEffect(() => {
-        const sizeParam = Mappers.mapToSizeRequestParams(sizeSearchParam);
-        const sexParam = Mappers.mapToSizeRequestParams(sexSearchParam);
+        const sizeParam = Mappers.mapToStringRequestParams(sizeSearchParam);
+        const sexParam = Mappers.mapToStringRequestParams(sexSearchParam);
+        const urlParam = Mappers.mapUrlParam(window.location.href);
+        const skipParam = Utils.getSkipParam(petItems.length, currentPage * pagePetsLimit);
+        if (urlParam) {
+            chengeCurrentPage(urlParam);
+        }
+
         const requestParams = {
             'fields.name[match]': nameSearchParam,
             'fields.size[in]': sizeParam,
             'fields.sex[in]': sexParam,
+            limit: pagePetsLimit,
+            skip: skipParam,
         };
         changeIsLoading(true);
         contentfulClient.getFilteredPetsList(requestParams).then(pets => {
             changePetItems(pets.items);
             changeIsLoading(false);
         });
-    }, [nameSearchParam, sexSearchParam, sizeSearchParam]);
+    }, [nameSearchParam, sexSearchParam, sizeSearchParam, currentPage]);
 
     useEffect(() => {
         Document.setTitle('Наши питомцы');
@@ -80,7 +110,9 @@ const PetsLayout = () => {
             <SearchParamContext.Provider value={searchParams}>
                 <PetsFilterLayout />
             </SearchParamContext.Provider>
-            <PetsGrid petsList={petItems} searchRequest={nameSearchParam} />
+            <PaginationContext.Provider value={paginationParams}>
+                <PetsGrid petsList={petItems} searchRequest={nameSearchParam} />
+            </PaginationContext.Provider>
         </div>
     );
 };
