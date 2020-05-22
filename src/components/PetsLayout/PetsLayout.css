@@ -1,7 +1,9 @@
 .pets-layout {
     display: grid;
     height: 100%;
-    padding: 40px 15px;
-    grid-template-columns: 300px auto;
-    gap: 15px;
+    padding: 120px 15px 15px 15px;
+    grid-template:
+        [main-left] 'nav  main' 1fr [main-right]
+        [footer-left] 'nav  foot' 50px [footer-right]
+        / 300px 1fr;
 }

@@ -17,10 +17,7 @@ class Utils {
         return html.replace(/>.+<\/iframe>/, '></iframe>');
     };
 
-    static getSkipParam = (amountEl, elStep) => {
-        if (amountEl < elStep) return 0;
-        return elStep;
-    };
+    static multiplyDigits = (num1, num2) => num1 * num2;
 
     static throttle = (...args) => {
         let isThrottled = false;

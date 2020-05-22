@@ -1,6 +1,5 @@
 import { h } from 'preact';
 import GridCard from '../GridCard/GridCard';
-import PetsPagination from '../PetsPagination/PetsPagination';
 
 import style from './PetsGrid.css';
 
@@ -21,12 +20,7 @@ const PetsGrid = pets => {
         <GridCard slug={pet.fields.slug} name={pet.fields.name} mainPhoto={pet.fields.mainPhoto} />
     ));
 
-    return (
-        <div className={style['pets-grid__wrapper']}>
-            <section className={style['pets-grid']}>{listOfPets}</section>
-            <PetsPagination />
-        </div>
-    );
+    return <section className={style['pets-grid']}>{listOfPets}</section>;
 };
 
 export default PetsGrid;

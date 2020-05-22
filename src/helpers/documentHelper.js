@@ -4,7 +4,7 @@ class Document {
     };
 
     static setUrl = text => {
-        window.location.pathname = `${window.location.pathname}${text}`;
+        window.location.href = `${window.location.pathname}?page=${text}`;
     };
 }
 

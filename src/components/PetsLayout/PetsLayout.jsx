@@ -2,7 +2,6 @@ import { h } from 'preact';
 import { useEffect, useState, useMemo } from 'preact/hooks';
 
 import SearchParamContext from './SearchParamContext';
-import PaginationContext from './PaginationContext';
 import contentfulClient from '../../helpers/contentful/contentfulClient';
 import Document from '../../helpers/documentHelper';
 import Mappers from '../../helpers/mappers';
@@ -10,11 +9,15 @@ import Utils from '../../helpers/utils';
 
 import PetsGrid from '../PetsGrid/PetsGrid';
 import PetsFilterLayout from '../PetsFilterLayout/PetsFilterLayout';
+import PetsPagination from '../PetsPagination/PetsPagination';
 
 import style from './PetsLayout.css';
 
 const PetsLayout = () => {
-    const [petItems, changePetItems] = useState([]);
+    const [petData, changePetsData] = useState({
+        petItems: 0,
+        totalPetItems: 0,
+    });
 
     const [nameSearchParam, changeNameSearchParam] = useState('');
 
@@ -46,21 +49,9 @@ const PetsLayout = () => {
 
     const [isLoading, changeIsLoading] = useState(false);
 
-    const [currentPage, chengeCurrentPage] = useState(0);
+    const [currentPage, changeCurrentPage] = useState(1);
 
-    const pagePetsLimit = 4;
-
-    const paginationParams = useMemo(
-        () => ({
-            paginationMethods: {
-                changePage: chengeCurrentPage,
-            },
-            paginationValues: {
-                currentPage,
-            },
-        }),
-        [chengeCurrentPage]
-    );
+    const petItemsPerPage = 1;
 
     const searchParams = useMemo(
         () => ({
@@ -70,9 +61,9 @@ const PetsLayout = () => {
                 searchBySize: changeSizeSearchParam,
             },
             searchValues: {
-                isLoading,
                 sexSearchParam,
                 sizeSearchParam,
+                isLoading,
             },
         }),
         [changeNameSearchParam, changeSexSearchParam, changeSizeSearchParam, isLoading]
@@ -81,22 +72,22 @@ const PetsLayout = () => {
     useEffect(() => {
         const sizeParam = Mappers.mapToStringRequestParams(sizeSearchParam);
         const sexParam = Mappers.mapToStringRequestParams(sexSearchParam);
-        const urlParam = Mappers.mapUrlParam(window.location.href);
-        const skipParam = Utils.getSkipParam(petItems.length, currentPage * pagePetsLimit);
-        if (urlParam) {
-            chengeCurrentPage(urlParam);
-        }
+        const skipParam = Utils.multiplyDigits(currentPage - 1, petItemsPerPage);
 
         const requestParams = {
             'fields.name[match]': nameSearchParam,
             'fields.size[in]': sizeParam,
             'fields.sex[in]': sexParam,
-            limit: pagePetsLimit,
+            limit: petItemsPerPage,
             skip: skipParam,
         };
         changeIsLoading(true);
         contentfulClient.getFilteredPetsList(requestParams).then(pets => {
-            changePetItems(pets.items);
+            const data = {
+                petItems: pets.items,
+                totalPetItems: pets.total,
+            };
+            changePetsData(data);
             changeIsLoading(false);
         });
     }, [nameSearchParam, sexSearchParam, sizeSearchParam, currentPage]);
@@ -110,9 +101,17 @@ const PetsLayout = () => {
             <SearchParamContext.Provider value={searchParams}>
                 <PetsFilterLayout />
             </SearchParamContext.Provider>
-            <PaginationContext.Provider value={paginationParams}>
-                <PetsGrid petsList={petItems} searchRequest={nameSearchParam} />
-            </PaginationContext.Provider>
+            <PetsGrid petsList={petData.petItems} searchRequest={nameSearchParam} />
+            {petData.totalPetItems < 3 ? (
+                ''
+            ) : (
+                <PetsPagination
+                    currentPage={currentPage}
+                    totalPages={petData.totalPetItems}
+                    itemsPerPage={petItemsPerPage}
+                    changeCurrentPage={changeCurrentPage}
+                />
+            )}
         </div>
     );
 };

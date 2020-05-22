@@ -1,0 +1,4 @@
+.pets-pagination {
+    padding: 15px 0 5px 15px;
+    grid-area: foot;
+}

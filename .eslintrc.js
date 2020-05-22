@@ -10,15 +10,16 @@ module.exports = {
         ecmaVersion: 6,
         sourceType: 'module',
         ecmaFeatures: {
-            jsx: true
-        }
+            jsx: true,
+        },
     },
     settings: {
         react: {
-            pragma: "h"
-        }
+            pragma: 'h',
+        },
     },
     rules: {
-        'react/no-danger': 'off' // For youtube video embedding. XSS protection implemented
-    }
+        'react/no-danger': 'off', // For youtube video embedding. XSS protection implemented
+        'no-plusplus': '[2, { allowForLoopAfterthoughts: true }]',
+    },
 };
