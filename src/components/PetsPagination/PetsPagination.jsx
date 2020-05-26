@@ -11,7 +11,7 @@ const PetsPagination = ({ currentPage, totalPages, itemsPerPage, changeCurrentPa
     let startPage = 1;
     const pageList = [];
     const total = Math.floor(totalPages - 1 / itemsPerPage) + 1;
-    const groupCount = 3;
+    const groupCount = 5;
 
     if (currentPage >= groupCount) {
         startPage = currentPage - 2;
@@ -25,7 +25,7 @@ const PetsPagination = ({ currentPage, totalPages, itemsPerPage, changeCurrentPa
         startPage = 1;
     }
 
-    if (total <= 5) {
+    if (total <= 10) {
         for (let i = 1; i <= total; i++) {
             pageList.push(
                 <PetsPaginationItem
@@ -74,7 +74,7 @@ const PetsPagination = ({ currentPage, totalPages, itemsPerPage, changeCurrentPa
             />
         );
     }
-    console.log(pageList);
+
 
     return (
         <nav
