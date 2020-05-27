@@ -10,7 +10,8 @@ import style from './PetsPagination.css';
 const PetsPagination = ({ currentPage, totalPages, itemsPerPage, changeCurrentPage }) => {
     let startPage = 1;
     const pageList = [];
-    const total = Math.floor(totalPages - 1 / itemsPerPage) + 1;
+    let total = (totalPages - 1) / itemsPerPage;
+    total = Math.floor(total) + 1;
     const groupCount = 5;
 
     if (currentPage >= groupCount) {
@@ -74,7 +75,6 @@ const PetsPagination = ({ currentPage, totalPages, itemsPerPage, changeCurrentPa
             />
         );
     }
-
 
     return (
         <nav
