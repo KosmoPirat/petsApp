@@ -49,7 +49,8 @@ const PetsLayout = () => {
 
     const [isLoading, changeIsLoading] = useState(false);
 
-    const [currentPage, changeCurrentPage] = useState(1);
+    const defaultCurPage = Mappers.mapUrlParam(window.location.href);
+    const [currentPage, changeCurrentPage] = useState(defaultCurPage);
 
     const petItemsPerPage = 1;
 

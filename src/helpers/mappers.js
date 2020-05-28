@@ -10,7 +10,7 @@ class Mappers {
 
     static mapUrlParam = url => {
         const urlParam = url.match(/.+\?page=(\d+)$/i);
-        return urlParam ? +urlParam[1] : 0;
+        return urlParam ? +urlParam[1] : 1;
     };
 }
 
