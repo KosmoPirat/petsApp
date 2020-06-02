@@ -103,16 +103,11 @@ const PetsLayout = () => {
                 <PetsFilterLayout />
             </SearchParamContext.Provider>
             <PetsGrid petsList={petData.petItems} searchRequest={nameSearchParam} />
-            {petData.totalPetItems < 3 ? (
-                ''
-            ) : (
-                <PetsPagination
-                    currentPage={currentPage}
-                    totalPages={petData.totalPetItems}
-                    itemsPerPage={petItemsPerPage}
-                    changeCurrentPage={changeCurrentPage}
-                />
-            )}
+            <PetsPagination
+                currentPage={currentPage}
+                totalPages={Math.ceil(petData.totalPetItems / petItemsPerPage)}
+                changeCurrentPage={changeCurrentPage}
+            />
         </div>
     );
 };

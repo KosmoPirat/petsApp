@@ -1,5 +1,4 @@
 import { h } from 'preact';
-import { useState } from 'preact/hooks';
 
 import PropTypes from 'prop-types';
 
@@ -7,70 +6,17 @@ import PetsPaginationItem from '../PetPaginationItem/PetPaginationItem';
 
 import style from './PetsPagination.css';
 
-const PetsPagination = ({ currentPage, totalPages, itemsPerPage, changeCurrentPage }) => {
-    let startPage = 1;
+const PetsPagination = ({ currentPage, totalPages, changeCurrentPage }) => {
     const pageList = [];
-    let total = (totalPages - 1) / itemsPerPage;
-    total = Math.floor(total) + 1;
-    const groupCount = 5;
+    const pageItemsOffset = 1;
+    const currentPageIndex = currentPage - 1;
+    let alreadySkipped = false;
 
-    if (currentPage >= groupCount) {
-        startPage = currentPage - 2;
-    }
-
-    if (currentPage < groupCount) {
-        startPage = 1;
-    }
-
-    if (currentPage === 1) {
-        startPage = 1;
-    }
-
-    if (total <= 10) {
-        for (let i = 1; i <= total; i++) {
-            pageList.push(
-                <PetsPaginationItem
-                    page={currentPage}
-                    pageNumber={i}
-                    changePage={changeCurrentPage}
-                />
-            );
-        }
-    } else {
-        pageList.push(
-            <PetsPaginationItem page={currentPage} pageNumber={1} changePage={changeCurrentPage} />
-        );
-
-        let pageLength = 0;
-        if (groupCount + startPage > total) {
-            pageLength = total;
-        } else {
-            pageLength = groupCount + startPage;
-        }
-
-        if (currentPage >= groupCount) {
-            pageList.push(<PetsPaginationItem isDelimiter={true} />);
-        }
-
-        for (let i = startPage; i < pageLength; i++) {
-            if (i <= total - 1 && i > 1) {
-                pageList.push(
-                    <PetsPaginationItem
-                        page={currentPage}
-                        pageNumber={i}
-                        changePage={changeCurrentPage}
-                    />
-                );
-            }
-        }
-
-        if (total - startPage >= groupCount + 1) {
-            pageList.push(<PetsPaginationItem isDelimiter={true} />);
-        }
+    for (let i = 1; i <= totalPages; i++) {
         pageList.push(
             <PetsPaginationItem
-                page={currentPage}
-                pageNumber={total}
+                isCurrent={currentPage === i}
+                pageNumber={i}
                 changePage={changeCurrentPage}
             />
         );
@@ -82,7 +28,28 @@ const PetsPagination = ({ currentPage, totalPages, itemsPerPage, changeCurrentPa
             role="navigation"
             aria-label="pagination"
         >
-            <ul className="pagination-list">{pageList}</ul>
+            <ul className="pagination-list">
+                {pageList.reduce((acc, pageItem, index) => {
+                    if (
+                        index === 0 ||
+                        index === totalPages - 1 ||
+                        (index >= currentPageIndex - pageItemsOffset &&
+                            index <= currentPageIndex + pageItemsOffset)
+                    ) {
+                        alreadySkipped = false;
+                        acc.push(pageItem);
+                        return acc;
+                    }
+
+                    if (!alreadySkipped) {
+                        acc.push(<PetsPaginationItem isDelimiter />);
+                    }
+
+                    alreadySkipped = true;
+
+                    return acc;
+                }, [])}
+            </ul>
         </nav>
     );
 };
@@ -90,7 +57,6 @@ const PetsPagination = ({ currentPage, totalPages, itemsPerPage, changeCurrentPa
 PetsPagination.propTypes = {
     currentPage: PropTypes.number.isRequired,
     totalPages: PropTypes.number.isRequired,
-    itemsPerPage: PropTypes.number.isRequired,
     changeCurrentPage: PropTypes.func.isRequired,
 };
 

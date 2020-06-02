@@ -20,6 +20,6 @@ module.exports = {
     },
     rules: {
         'react/no-danger': 'off', // For youtube video embedding. XSS protection implemented
-        'no-plusplus': '[2, { allowForLoopAfterthoughts: true }]',
+        'no-plusplus': ["error", { "allowForLoopAfterthoughts": true }],
     },
 };
