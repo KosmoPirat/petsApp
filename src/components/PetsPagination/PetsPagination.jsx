@@ -3,6 +3,7 @@ import { h } from 'preact';
 import PropTypes from 'prop-types';
 
 import PetsPaginationItem from '../PetPaginationItem/PetPaginationItem';
+import PaginationDelimiter from '../PaginationDelimeter/PaginationDelimeter';
 
 import style from './PetsPagination.css';
 
@@ -42,7 +43,7 @@ const PetsPagination = ({ currentPage, totalPages, changeCurrentPage }) => {
                     }
 
                     if (!alreadySkipped) {
-                        acc.push(<PetsPaginationItem isDelimiter />);
+                        acc.push(<PaginationDelimiter />);
                     }
 
                     alreadySkipped = true;

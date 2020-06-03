@@ -3,16 +3,7 @@ import PropTypes from 'prop-types';
 
 import { Link } from 'preact-router/match';
 
-const PetPaginationItem = ({ isCurrent, pageNumber, changePage, isDelimiter }) => {
-    // TODO: Вынести в отдельный компонент
-    if (isDelimiter) {
-        return (
-            <li>
-                <span className="pagination-ellipsis">&hellip;</span>
-            </li>
-        );
-    }
-
+const PetPaginationItem = ({ isCurrent, pageNumber, changePage }) => {
     return (
         <li>
             <Link
@@ -28,18 +19,9 @@ const PetPaginationItem = ({ isCurrent, pageNumber, changePage, isDelimiter }) =
 };
 
 PetPaginationItem.propTypes = {
-    isCurrent: PropTypes.bool,
-    pageNumber: PropTypes.number,
-    changePage: PropTypes.func,
-    isDelimiter: PropTypes.bool,
-};
-
-// После выноса delimeter в отдельный компонент все пропсы сделать обязательными, дефолтные значения удалить
-PetPaginationItem.defaultProps = {
-    isCurrent: false,
-    pageNumber: 0,
-    changePage: () => {},
-    isDelimiter: false,
+    isCurrent: PropTypes.bool.isRequired,
+    pageNumber: PropTypes.number.isRequired,
+    changePage: PropTypes.func.isRequired,
 };
 
 export default PetPaginationItem;
