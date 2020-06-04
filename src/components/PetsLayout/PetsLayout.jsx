@@ -52,7 +52,7 @@ const PetsLayout = () => {
     const defaultCurPage = Mappers.mapUrlParam(window.location.href);
     const [currentPage, changeCurrentPage] = useState(defaultCurPage);
 
-    const petItemsPerPage = 1;
+    const petItemsPerPage = 10;
 
     const searchParams = useMemo(
         () => ({
@@ -102,12 +102,14 @@ const PetsLayout = () => {
             <SearchParamContext.Provider value={searchParams}>
                 <PetsFilterLayout />
             </SearchParamContext.Provider>
-            <PetsGrid petsList={petData.petItems} searchRequest={nameSearchParam} />
-            <PetsPagination
-                currentPage={currentPage}
-                totalPages={Math.ceil(petData.totalPetItems / petItemsPerPage)}
-                changeCurrentPage={changeCurrentPage}
-            />
+            <div className={style['pets-layout__content-wrapper']}>
+                <PetsGrid petsList={petData.petItems} searchRequest={nameSearchParam} />
+                <PetsPagination
+                    currentPage={currentPage}
+                    totalPages={Math.ceil(petData.totalPetItems / petItemsPerPage)}
+                    changeCurrentPage={changeCurrentPage}
+                />
+            </div>
         </div>
     );
 };

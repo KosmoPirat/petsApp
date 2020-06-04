@@ -1,9 +1,14 @@
 .pets-layout {
-    display: grid;
+    display: flex;
     height: 100%;
-    padding: 120px 15px 15px 15px;
-    grid-template:
-        [main-left] 'nav  main' 1fr [main-right]
-        [footer-left] 'nav  foot' 50px [footer-right]
-        / 300px 1fr;
+    padding: 15px;
+}
+
+.pets-layout__content-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    overflow: auto;
 }

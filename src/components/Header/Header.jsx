@@ -7,7 +7,7 @@ import style from './Header.css';
 const Header = () => (
     <nav className={`navbar ${style.header}`} role="navigation" aria-label="main navigation">
         <div className={`${style.header__logo}`}>
-            <img src={adoptionIcon} className={`${style[`header__logo-image`]}`} alt="Логотип" />
+            <img src={adoptionIcon} className={style['header__logo-image']} alt="Логотип" />
             <div className="title is-3">Приют собак</div>
         </div>
 
