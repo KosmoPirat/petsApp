@@ -17,6 +17,8 @@ class Utils {
         return html.replace(/>.+<\/iframe>/, '></iframe>');
     };
 
+    static multiplyDigits = (num1, num2) => num1 * num2;
+
     static throttle = (...args) => {
         let isThrottled = false;
         let savedArgs;

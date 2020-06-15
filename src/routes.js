@@ -12,6 +12,10 @@ export default [
         path: '/pets',
     },
     {
+        component: PetsLayout,
+        path: '/pets?page=:id',
+    },
+    {
         component: PetProfileLayout,
         path: '/pet-profile/:slug',
     },
